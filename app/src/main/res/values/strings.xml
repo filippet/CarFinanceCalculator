@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">CarFinanceCalculator</string>
+
+    <!-- The names of the payment frequency options.
+     Usage: appear as the text on button-like widgets -->
+    <string name="monthly">Monthly</string>
+    <string name="bi_weekly">Bi-Weekly</string>
+    <string name="weekly">Weekly</string>
+
+
+    <!-- The cash amount put as a down payment.
+      Usage: static text naming an associated input field -->
+    <string name="cash_down">Cash down</string>
+
+    <!-- The amount the party receives for their current vehicle.
+      Usage: static text naming an associated input field -->
+    <string name="trade_in">Trade In</string>
+
+    <!--  NOTE: The sum of the cash down and trade in amounts form total down payment amount. -->
+
 </resources>
