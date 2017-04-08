@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ntangent.carfinancecalculator.CalculatorActivity">
+    tools:context="com.ntangent.carfinancecalculator.calculator.CalculatorActivity">
 
-    <include layout="@layout/calculator" />
+    <FrameLayout
+        android:id="@+id/v_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
 </FrameLayout>
