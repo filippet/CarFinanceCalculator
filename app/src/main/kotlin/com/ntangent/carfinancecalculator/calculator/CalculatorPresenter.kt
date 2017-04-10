@@ -1,20 +1,25 @@
 package com.ntangent.carfinancecalculator.calculator
 
+import com.ntangent.carfinancecalculator.DefaultUseCaseObserver
+import com.ntangent.carfinancecalculator.ObservableUseCase
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
+import com.ntangent.carfinancecalculator.calculator.domain.interactor.GetVehicleLoanTermsUseCase
 import com.ntangent.carfinancecalculator.data.FinanceParams
+import io.reactivex.observers.DisposableObserver
 
 
 class CalculatorPresenter(
-        private val financeParams: FinanceParams,
+        private val getLoanTermsUseCase: ObservableUseCase<List<FinanceParams>, GetVehicleLoanTermsUseCase.Params>,
         private val view: CalculatorContract.View,
         private val loanCalculator: LoanCalculator,
         private val stringFormatter: CalculatorStringFormatter
+
 ): CalculatorContract.Presenter {
 
     override fun subscribe() {
-        setView()
+        retrieveLoanTerms()
     }
 
     override fun unsubscribe() {
@@ -33,7 +38,20 @@ class CalculatorPresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun setView() {
+    private fun retrieveLoanTerms() {
+        val observer = newRetrieveLoanTermsObserver()
+        getLoanTermsUseCase.execute(GetVehicleLoanTermsUseCase.params(), observer)
+    }
+
+    private fun newRetrieveLoanTermsObserver(): DisposableObserver<List<FinanceParams>> {
+        return object : DefaultUseCaseObserver<List<FinanceParams>>() {
+            override fun onNext(value: List<FinanceParams>) {
+                setView(value[0])
+            }
+        }
+    }
+
+    private fun setView(financeParams: FinanceParams) {
         val vehiclePrice = financeParams.vehiclePrice
         val termInMonths = financeParams.termRates[0].term
         val annualInterestRate = financeParams.termRates[0].rate
@@ -46,13 +64,24 @@ class CalculatorPresenter(
                 paymentFrequency = paymentFrequency
         ).payment
 
+        with(view) {
+            setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
+            setPaymentAmount(stringFormatter.paymentAmount(payment))
+            setTerm(stringFormatter.term(termInMonths))
+            setRate(stringFormatter.rate(annualInterestRate))
+            setMinTermMonths(stringFormatter.minTermMonths(financeParams.minTerm()))
+            setMaxTermMonths(stringFormatter.maxTermMonths(financeParams.maxTerm()))
+            setPaymentFrequency(PaymentFrequency.MONTHLY)
+        }
+    }
 
-        view.setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
-        view.setPaymentAmount(stringFormatter.paymentAmount(payment))
-        view.setTerm(stringFormatter.term(termInMonths))
-        view.setRate(stringFormatter.rate(annualInterestRate))
-        view.setMinTermMonths(stringFormatter.minTermMonths(12))
-        view.setMaxTermMonths(stringFormatter.maxTermMonths(24))
-        view.setPaymentFrequency(PaymentFrequency.MONTHLY)
+
+    //TODO: Move these methods to domain
+    private fun FinanceParams.minTerm(): Int {
+        return termRates.first().term
+    }
+
+    private fun FinanceParams.maxTerm(): Int {
+        return termRates.last().term
     }
 }
