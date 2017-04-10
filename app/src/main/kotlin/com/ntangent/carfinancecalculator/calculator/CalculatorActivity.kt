@@ -1,21 +1,36 @@
 package com.ntangent.carfinancecalculator.calculator
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import butterknife.ButterKnife
+import com.ntangent.carfinancecalculator.CalculatorApplication
 import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.util.addFragment
+import javax.inject.Inject
 
 class CalculatorActivity : AppCompatActivity() {
 
     private val FRAGMENT_CONTAINER_VIEW_RESOURCE_ID = R.id.v_content
+
+    @Inject lateinit var calculatorPresenter: CalculatorPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calculator)
         ButterKnife.bind(this)
 
-        initializeFragment()
+        val fragment = initializeFragment()
+        initiateInjector(fragment)
+    }
+
+    private fun initiateInjector(calculatorFragment: CalculatorFragment) {
+        DaggerCalculatorComponent.builder()
+                .calculatorPresenterModule(
+                        CalculatorPresenterModule(calculatorFragment))
+                .financeParamsRepositoryComponent(
+                        (application as CalculatorApplication).getFinanceParamsRepositoryComponent())
+                .build()
+                .inject(this)
     }
 
     private fun initializeFragment() : CalculatorFragment {

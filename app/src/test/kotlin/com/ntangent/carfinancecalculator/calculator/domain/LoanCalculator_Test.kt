@@ -9,7 +9,7 @@ import kotlin.test.fail
  * loan calculator at http://wwwa.autotrader.ca/finance/calculator
  *
  */
-class LoanCalculatorTest {
+class LoanCalculator_Test {
 
     companion object {
         private val VEHICLE_PRICE = 20000

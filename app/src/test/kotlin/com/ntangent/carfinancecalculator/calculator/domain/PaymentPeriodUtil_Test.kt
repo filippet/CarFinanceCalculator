@@ -4,7 +4,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
-class PaymentPeriodUtilTest {
+class PaymentPeriodUtil_Test {
 
     private fun paymentsPerYear(paymentFrequency: PaymentFrequency)
             = PaymentPeriodUtil.paymentsPerYear(paymentFrequency)

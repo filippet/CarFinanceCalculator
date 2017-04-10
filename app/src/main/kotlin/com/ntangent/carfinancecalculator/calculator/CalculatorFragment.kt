@@ -39,12 +39,30 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     @BindView(R.id.tx_cash_down        ) lateinit var txCashDown         : EditText
     @BindView(R.id.tx_trade_in         ) lateinit var txTradeIn          : EditText
 
-    private lateinit var presenter: CalculatorContract.Presenter
+   private lateinit var presenter: CalculatorContract.Presenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.calculator_fragment, container, false)
         ButterKnife.bind(this, view)
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.subscribe()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
+    override fun setPresenter(presenter: CalculatorContract.Presenter) {
+        this.presenter = presenter
     }
 
     //<CalculatorContract.View implementation>
@@ -82,5 +100,4 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     }
     //
     //</CalculatorContract.View implementation>
-
 }

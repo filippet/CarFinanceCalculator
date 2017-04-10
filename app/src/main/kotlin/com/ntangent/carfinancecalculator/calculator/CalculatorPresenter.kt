@@ -8,22 +8,28 @@ import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.calculator.domain.interactor.GetVehicleLoanTermsUseCase
 import com.ntangent.carfinancecalculator.data.FinanceParams
 import io.reactivex.observers.DisposableObserver
+import javax.inject.Inject
 
 
-class CalculatorPresenter(
-        private val getLoanTermsUseCase: ObservableUseCase<List<FinanceParams>, GetVehicleLoanTermsUseCase.Params>,
+class CalculatorPresenter @Inject constructor (
+        private val getLoanTermsUseCase: GetVehicleLoanTermsUseCase,
         private val view: CalculatorContract.View,
         private val loanCalculator: LoanCalculator,
         private val stringFormatter: CalculatorStringFormatter
 
 ): CalculatorContract.Presenter {
 
+    @Inject
+    fun setupListeners() {
+        view.setPresenter(this)
+    }
+
     override fun subscribe() {
         retrieveLoanTerms()
     }
 
     override fun unsubscribe() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        getLoanTermsUseCase.unsubscribe()
     }
 
     override fun termMonthsChanged(value: Int) {

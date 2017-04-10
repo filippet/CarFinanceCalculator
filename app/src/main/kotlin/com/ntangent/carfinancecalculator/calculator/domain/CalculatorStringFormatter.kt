@@ -1,8 +1,5 @@
 package com.ntangent.carfinancecalculator.calculator.domain
 
-/**
- * Created by filip on 4/9/17.
- */
 interface CalculatorStringFormatter {
     fun vehiclePrice(value: Int): String
 

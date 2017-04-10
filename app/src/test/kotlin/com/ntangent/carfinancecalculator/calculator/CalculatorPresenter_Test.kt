@@ -19,7 +19,7 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 
-class CalculatorPresenterTest {
+class CalculatorPresenter_Test {
     private lateinit var presenter: CalculatorPresenter
 
     @Mock private lateinit var mockView: CalculatorContract.View

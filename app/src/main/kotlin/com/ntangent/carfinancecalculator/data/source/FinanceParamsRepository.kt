@@ -4,9 +4,6 @@ import com.ntangent.carfinancecalculator.data.FinanceParams
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 
-/**
- * Created by filip on 4/10/17.
- */
 class FinanceParamsRepository(
         private val localDataSource: FinanceParamsDataSource
 ): FinanceParamsDataSource {
