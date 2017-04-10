@@ -2,12 +2,7 @@ package com.ntangent.carfinancecalculator.calculator
 
 import com.ntangent.carfinancecalculator.BasePresenter
 import com.ntangent.carfinancecalculator.BaseView
-
-enum class PaymentFrequency {
-    MONTHLY,
-    BI_WEEKLY,
-    WEEKLY
-}
+import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 
 class CalculatorContract {
 

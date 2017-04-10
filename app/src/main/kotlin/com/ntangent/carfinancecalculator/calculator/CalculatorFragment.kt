@@ -12,6 +12,7 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
+import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 
 class CalculatorFragment : Fragment(), CalculatorContract.View {
 
@@ -74,9 +75,9 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
 
     override fun setPaymentFrequency(value: PaymentFrequency) {
         when (value) {
-            PaymentFrequency.MONTHLY -> rgPaymentFrequency.check(R.id.rb_monthly)
+            PaymentFrequency.MONTHLY   -> rgPaymentFrequency.check(R.id.rb_monthly)
             PaymentFrequency.BI_WEEKLY -> rgPaymentFrequency.check(R.id.rb_biweekly)
-            PaymentFrequency.WEEKLY -> rgPaymentFrequency.check(R.id.rb_weekly)
+            PaymentFrequency.WEEKLY    -> rgPaymentFrequency.check(R.id.rb_weekly)
         }
     }
     //

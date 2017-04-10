@@ -1,11 +1,16 @@
 package com.ntangent.carfinancecalculator.calculator
 
+import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
+import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
+import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.data.FinanceParams
 
 
 class CalculatorPresenter(
         private val financeParams: FinanceParams,
-        private val view: CalculatorContract.View
+        private val view: CalculatorContract.View,
+        private val loanCalculator: LoanCalculator,
+        private val stringFormatter: CalculatorStringFormatter
 ): CalculatorContract.Presenter {
 
     override fun subscribe() {
@@ -29,12 +34,25 @@ class CalculatorPresenter(
     }
 
     private fun setView() {
-        view.setVehiclePrice(financeParams.vehiclePrice.toString())
-        view.setPaymentAmount(25.toString())
-        view.setTerm(financeParams.termRates[0].term.toString())
-        view.setRate(financeParams.termRates[0].rate.toString())
-        view.setMinTermMonths(1.toString())
-        view.setMaxTermMonths(12.toString())
+        val vehiclePrice = financeParams.vehiclePrice
+        val termInMonths = financeParams.termRates[0].term
+        val annualInterestRate = financeParams.termRates[0].rate
+        val paymentFrequency = PaymentFrequency.MONTHLY
+
+        val payment = loanCalculator.calculateLoan(
+                vehiclePrice = vehiclePrice,
+                termInMonths = termInMonths,
+                annualInterestRate = annualInterestRate,
+                paymentFrequency = paymentFrequency
+        ).payment
+
+
+        view.setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
+        view.setPaymentAmount(stringFormatter.paymentAmount(payment))
+        view.setTerm(stringFormatter.term(termInMonths))
+        view.setRate(stringFormatter.rate(annualInterestRate))
+        view.setMinTermMonths(stringFormatter.minTermMonths(12))
+        view.setMaxTermMonths(stringFormatter.maxTermMonths(24))
         view.setPaymentFrequency(PaymentFrequency.MONTHLY)
     }
 }
