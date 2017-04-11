@@ -9,9 +9,9 @@ class CalculatorContract {
     interface Presenter: BasePresenter {
         fun termMonthsChanged(value: Int)
 
-        fun cashDownAmountChanged(value: Double)
+        fun cashDownAmountChanged(value: Int)
 
-        fun tradeInAmountChanged(value: Double)
+        fun tradeInAmountChanged(value: Int)
     }
 
     interface View: BaseView<Presenter> {
@@ -28,5 +28,9 @@ class CalculatorContract {
         fun setMaxTermMonths(value: String)
 
         fun setPaymentFrequency(value: PaymentFrequency)
+
+        fun getCashDownAmount(): Int
+
+        fun getTradeInAmount(): Int
     }
 }

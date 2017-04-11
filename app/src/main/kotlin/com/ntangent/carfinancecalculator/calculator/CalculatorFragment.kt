@@ -2,10 +2,10 @@ package com.ntangent.carfinancecalculator.calculator
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.SeekBar
 import android.widget.TextView
@@ -13,8 +13,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import android.text.method.PasswordTransformationMethod
-
+import com.ntangent.carfinancecalculator.widget.CurrencyEditText
 
 
 class CalculatorFragment : Fragment(), CalculatorContract.View {
@@ -39,10 +38,16 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     @BindView(R.id.tv_max_term         ) lateinit var tvMaxTerm          : TextView
     @BindView(R.id.sb_term_months      ) lateinit var sbTermMonths       : SeekBar
     @BindView(R.id.rg_payment_frequency) lateinit var rgPaymentFrequency : RadioGroup
-    @BindView(R.id.tx_cash_down        ) lateinit var txCashDown         : EditText
-    @BindView(R.id.tx_trade_in         ) lateinit var txTradeIn          : EditText
+    @BindView(R.id.v_cash_down         ) lateinit var vCashDown          : View
+    @BindView(R.id.v_trade_in          ) lateinit var vTradeIn           : View
 
-   private lateinit var presenter: CalculatorContract.Presenter
+    private lateinit var tvCashDown: TextView
+    private lateinit var txCashDown: CurrencyEditText
+
+    private lateinit var tvTradeIn: TextView
+    private lateinit var txTradeIn: CurrencyEditText
+
+    private lateinit var presenter: CalculatorContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,19 +56,43 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.calculator_fragment, container, false)
         ButterKnife.bind(this, view)
+
+        tvCashDown = vCashDown.findViewById(R.id.tv_name) as TextView
+        txCashDown = vCashDown.findViewById(R.id.tx_value) as CurrencyEditText
+        tvCashDown.setText(R.string.cash_down)
+
+        tvTradeIn = vTradeIn.findViewById(R.id.tv_name) as TextView
+        txTradeIn = vTradeIn.findViewById(R.id.tx_value) as CurrencyEditText
+        tvTradeIn.setText(R.string.trade_in)
+
         return view
     }
 
     override fun onResume() {
         super.onResume()
         presenter.subscribe()
+
         txCashDown.transformationMethod = NumbersOnlyKeyBoardTransformationMethod()
+        txCashDown.subscribeOnValueChangeListener(object: CurrencyEditText.OnValueChangeListener {
+            override fun newValue(value: Int) {
+                presenter.cashDownAmountChanged(value)
+            }
+        })
+
         txTradeIn.transformationMethod = NumbersOnlyKeyBoardTransformationMethod()
+        txTradeIn.subscribeOnValueChangeListener(object: CurrencyEditText.OnValueChangeListener {
+            override fun newValue(value: Int) {
+                presenter.tradeInAmountChanged(value)
+            }
+        })
     }
+
 
     override fun onPause() {
         super.onPause()
         presenter.unsubscribe()
+        txCashDown.removeOnValueChangeListener()
+        txTradeIn.removeOnValueChangeListener()
     }
 
     override fun setPresenter(presenter: CalculatorContract.Presenter) {
@@ -102,6 +131,14 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
             PaymentFrequency.BI_WEEKLY -> rgPaymentFrequency.check(R.id.rb_biweekly)
             PaymentFrequency.WEEKLY    -> rgPaymentFrequency.check(R.id.rb_weekly)
         }
+    }
+
+    override fun getCashDownAmount(): Int {
+        return txCashDown.getAmount()
+    }
+
+    override fun getTradeInAmount(): Int {
+        return txTradeIn.getAmount()
     }
     //
     //</CalculatorContract.View implementation>

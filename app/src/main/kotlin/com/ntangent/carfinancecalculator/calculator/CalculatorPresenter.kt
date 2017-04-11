@@ -21,6 +21,8 @@ class CalculatorPresenter @Inject constructor (
     //TODO: move this to domain
     val DEFAULT_PAYMENT_FREQUENCY = PaymentFrequency.MONTHLY
 
+    var lastLoanTerms: List<FinanceParams> = arrayListOf()
+
     @Inject
     fun setupListeners() {
         view.setPresenter(this)
@@ -38,12 +40,12 @@ class CalculatorPresenter @Inject constructor (
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun cashDownAmountChanged(value: Double) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun cashDownAmountChanged(value: Int) {
+        setView(lastLoanTerms[0])
     }
 
-    override fun tradeInAmountChanged(value: Double) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun tradeInAmountChanged(value: Int) {
+        setView(lastLoanTerms[0])
     }
 
     private fun retrieveLoanTerms() {
@@ -54,7 +56,8 @@ class CalculatorPresenter @Inject constructor (
     private fun newRetrieveLoanTermsObserver(): DisposableObserver<List<FinanceParams>> {
         return object : DefaultUseCaseObserver<List<FinanceParams>>() {
             override fun onNext(value: List<FinanceParams>) {
-                setView(value[0])
+                lastLoanTerms = value
+                setView(lastLoanTerms[0])
             }
         }
     }
@@ -65,11 +68,16 @@ class CalculatorPresenter @Inject constructor (
         val annualInterestRate = financeParams.termRates[0].rate
         val paymentFrequency = PaymentFrequency.MONTHLY
 
+        val cashDownAmount = view.getCashDownAmount()
+        val tradeInAmount = view.getTradeInAmount()
+
         val payment = loanCalculator.calculateLoan(
                 vehiclePrice = vehiclePrice,
                 termInMonths = termInMonths,
                 annualInterestRate = annualInterestRate,
-                paymentFrequency = paymentFrequency
+                paymentFrequency = paymentFrequency,
+                cashDownAmount = cashDownAmount,
+                tradeInAmount = tradeInAmount
         ).payment
 
         with(view) {
