@@ -18,4 +18,28 @@
 
     <!--  NOTE: The sum of the cash down and trade in amounts form total down payment amount. -->
 
+
+    <!-- The template for payment amount containing dollar amount as well as payment period
+        E.g. '$2,252* Monthly' or '$1,234* Bi-Weekly' etc -->
+    <string name="payment_amount_template">%1$s* %2$s</string>
+
+    <!-- The template for payment term expressed in months, ending with comma
+        E.g. '24 Months,' or '72 Months,' etc. -->
+    <string name="payment_term_template">%1$s %2$s,</string>
+
+    <!-- The template for payment rate percentage trailed with the word 'Financing'
+        E.g. '9.99% Financing' or '6.99% Financing' etc. -->
+    <string name="payment_rate_template">%1$s %2$s</string>
+
+    <!-- The template for payment term min and max boundaries, trailed with the abbreviation
+        for word 'Months' ('mo' in English)
+        E.g. '24 mo' or '72 mo' etc.
+        Usage: labels for the ends of the seek bar -->
+    <string name="payment_term_months_template">%1$s %2$s</string>
+
+
+    <string name="months">Months</string>
+    <string name="month_abbreviated">mo</string>
+    <string name="financing">Financing</string>
+
 </resources>

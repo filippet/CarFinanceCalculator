@@ -30,7 +30,7 @@ class CalculatorPresenter_Test {
             return value.toString()
         }
 
-        override fun paymentAmount(value: Int): String {
+        override fun paymentAmount(value: Int, paymentFrequency: PaymentFrequency): String {
             return value.toString()
         }
 

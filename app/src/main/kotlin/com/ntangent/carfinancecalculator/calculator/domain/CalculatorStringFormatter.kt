@@ -3,7 +3,7 @@ package com.ntangent.carfinancecalculator.calculator.domain
 interface CalculatorStringFormatter {
     fun vehiclePrice(value: Int): String
 
-    fun paymentAmount(value: Int): String
+    fun paymentAmount(value: Int, paymentFrequency: PaymentFrequency): String
 
     fun term(value: Int): String
 

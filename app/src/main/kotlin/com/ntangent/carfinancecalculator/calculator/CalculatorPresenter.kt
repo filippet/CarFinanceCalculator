@@ -1,7 +1,6 @@
 package com.ntangent.carfinancecalculator.calculator
 
 import com.ntangent.carfinancecalculator.DefaultUseCaseObserver
-import com.ntangent.carfinancecalculator.ObservableUseCase
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
@@ -18,6 +17,9 @@ class CalculatorPresenter @Inject constructor (
         private val stringFormatter: CalculatorStringFormatter
 
 ): CalculatorContract.Presenter {
+
+    //TODO: move this to domain
+    val DEFAULT_PAYMENT_FREQUENCY = PaymentFrequency.MONTHLY
 
     @Inject
     fun setupListeners() {
@@ -72,12 +74,12 @@ class CalculatorPresenter @Inject constructor (
 
         with(view) {
             setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
-            setPaymentAmount(stringFormatter.paymentAmount(payment))
+            setPaymentAmount(stringFormatter.paymentAmount(payment, DEFAULT_PAYMENT_FREQUENCY))
             setTerm(stringFormatter.term(termInMonths))
             setRate(stringFormatter.rate(annualInterestRate))
             setMinTermMonths(stringFormatter.minTermMonths(financeParams.minTerm()))
             setMaxTermMonths(stringFormatter.maxTermMonths(financeParams.maxTerm()))
-            setPaymentFrequency(PaymentFrequency.MONTHLY)
+            setPaymentFrequency(DEFAULT_PAYMENT_FREQUENCY)
         }
     }
 

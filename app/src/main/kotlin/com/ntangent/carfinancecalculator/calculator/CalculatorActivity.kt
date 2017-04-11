@@ -1,10 +1,13 @@
 package com.ntangent.carfinancecalculator.calculator
 
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.v7.app.AppCompatActivity
 import butterknife.ButterKnife
+import com.ntangent.carfinancecalculator.ApplicationModule
 import com.ntangent.carfinancecalculator.CalculatorApplication
 import com.ntangent.carfinancecalculator.R
+import com.ntangent.carfinancecalculator.util.EspressoIdlingResource
 import com.ntangent.carfinancecalculator.util.addFragment
 import javax.inject.Inject
 
@@ -27,6 +30,8 @@ class CalculatorActivity : AppCompatActivity() {
         DaggerCalculatorComponent.builder()
                 .calculatorPresenterModule(
                         CalculatorPresenterModule(calculatorFragment))
+                .applicationModule(
+                        ApplicationModule(applicationContext))
                 .financeParamsRepositoryComponent(
                         (application as CalculatorApplication).getFinanceParamsRepositoryComponent())
                 .build()
@@ -46,4 +51,7 @@ class CalculatorActivity : AppCompatActivity() {
         return supportFragmentManager.findFragmentById(
                 FRAGMENT_CONTAINER_VIEW_RESOURCE_ID) as CalculatorFragment?
     }
+
+    @VisibleForTesting
+    fun getCountingIdlingResource() = EspressoIdlingResource.idlingResource
 }

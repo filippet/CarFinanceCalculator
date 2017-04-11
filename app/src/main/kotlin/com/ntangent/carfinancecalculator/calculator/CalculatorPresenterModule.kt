@@ -1,5 +1,6 @@
 package com.ntangent.carfinancecalculator.calculator
 
+import android.content.Context
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatterImpl
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
@@ -38,8 +39,8 @@ class CalculatorPresenterModule(
     }
 
     @Provides
-    internal fun provideCalculatorStringFormatter(): CalculatorStringFormatter {
-        return CalculatorStringFormatterImpl()
+    internal fun provideCalculatorStringFormatter(context: Context): CalculatorStringFormatter {
+        return CalculatorStringFormatterImpl(context)
     }
 
     @Provides
