@@ -1,6 +1,7 @@
 package com.ntangent.carfinancecalculator.calculator
 
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
@@ -65,6 +66,11 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
         txTradeIn = vTradeIn.findViewById(R.id.tx_value) as CurrencyEditText
         tvTradeIn.setText(R.string.trade_in)
 
+        rgPaymentFrequency.setOnCheckedChangeListener {
+            group, checkedId ->
+            val paymentFrequency = paymentFrequencyResIdToValue(checkedId)
+            presenter.paymentFrequencyChanged(paymentFrequency)
+        }
         return view
     }
 
@@ -126,11 +132,11 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     }
 
     override fun setPaymentFrequency(value: PaymentFrequency) {
-        when (value) {
-            PaymentFrequency.MONTHLY   -> rgPaymentFrequency.check(R.id.rb_monthly)
-            PaymentFrequency.BI_WEEKLY -> rgPaymentFrequency.check(R.id.rb_biweekly)
-            PaymentFrequency.WEEKLY    -> rgPaymentFrequency.check(R.id.rb_weekly)
-        }
+        rgPaymentFrequency.check(paymentFrequencyValueToResId(value))
+    }
+
+    override fun getPaymentFrequency(): PaymentFrequency {
+        return paymentFrequencyResIdToValue(rgPaymentFrequency.checkedRadioButtonId)
     }
 
     override fun getCashDownAmount(): Int {
@@ -146,6 +152,25 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     private class NumbersOnlyKeyBoardTransformationMethod : PasswordTransformationMethod() {
         override fun getTransformation(source: CharSequence, view: View): CharSequence {
             return source
+        }
+    }
+
+    private fun paymentFrequencyResIdToValue(@IdRes resId: Int): PaymentFrequency {
+        return when (resId) {
+            R.id.rb_monthly  -> PaymentFrequency.MONTHLY
+            R.id.rb_biweekly -> PaymentFrequency.BI_WEEKLY
+            R.id.rb_weekly   -> PaymentFrequency.WEEKLY
+            else -> {
+                throw IllegalStateException("Unknown payment frequency radio button id[$id]")
+            }
+        }
+    }
+
+    private fun paymentFrequencyValueToResId(paymentFrequency: PaymentFrequency): Int {
+        return when (paymentFrequency) {
+            PaymentFrequency.MONTHLY   -> R.id.rb_monthly
+            PaymentFrequency.BI_WEEKLY -> R.id.rb_biweekly
+            PaymentFrequency.WEEKLY    -> R.id.rb_weekly
         }
     }
 }

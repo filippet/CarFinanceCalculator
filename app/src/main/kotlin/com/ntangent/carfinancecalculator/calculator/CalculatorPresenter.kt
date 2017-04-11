@@ -18,9 +18,6 @@ class CalculatorPresenter @Inject constructor (
 
 ): CalculatorContract.Presenter {
 
-    //TODO: move this to domain
-    val DEFAULT_PAYMENT_FREQUENCY = PaymentFrequency.MONTHLY
-
     var lastLoanTerms: List<FinanceParams> = arrayListOf()
 
     @Inject
@@ -38,6 +35,12 @@ class CalculatorPresenter @Inject constructor (
 
     override fun termMonthsChanged(value: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun paymentFrequencyChanged(value: PaymentFrequency) {
+        if (lastLoanTerms.isNotEmpty()) {
+            setView(lastLoanTerms[0])
+        }
     }
 
     override fun cashDownAmountChanged(value: Int) {
@@ -66,8 +69,8 @@ class CalculatorPresenter @Inject constructor (
         val vehiclePrice = financeParams.vehiclePrice
         val termInMonths = financeParams.termRates[0].term
         val annualInterestRate = financeParams.termRates[0].rate
-        val paymentFrequency = PaymentFrequency.MONTHLY
 
+        val paymentFrequency = view.getPaymentFrequency()
         val cashDownAmount = view.getCashDownAmount()
         val tradeInAmount = view.getTradeInAmount()
 
@@ -82,12 +85,12 @@ class CalculatorPresenter @Inject constructor (
 
         with(view) {
             setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
-            setPaymentAmount(stringFormatter.paymentAmount(payment, DEFAULT_PAYMENT_FREQUENCY))
+            setPaymentAmount(stringFormatter.paymentAmount(payment, paymentFrequency))
             setTerm(stringFormatter.term(termInMonths))
             setRate(stringFormatter.rate(annualInterestRate))
             setMinTermMonths(stringFormatter.minTermMonths(financeParams.minTerm()))
             setMaxTermMonths(stringFormatter.maxTermMonths(financeParams.maxTerm()))
-            setPaymentFrequency(DEFAULT_PAYMENT_FREQUENCY)
+            setPaymentFrequency(paymentFrequency)
         }
     }
 

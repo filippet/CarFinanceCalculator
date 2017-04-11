@@ -9,6 +9,8 @@ class CalculatorContract {
     interface Presenter: BasePresenter {
         fun termMonthsChanged(value: Int)
 
+        fun paymentFrequencyChanged(value: PaymentFrequency)
+
         fun cashDownAmountChanged(value: Int)
 
         fun tradeInAmountChanged(value: Int)
@@ -28,6 +30,8 @@ class CalculatorContract {
         fun setMaxTermMonths(value: String)
 
         fun setPaymentFrequency(value: PaymentFrequency)
+
+        fun getPaymentFrequency(): PaymentFrequency
 
         fun getCashDownAmount(): Int
 

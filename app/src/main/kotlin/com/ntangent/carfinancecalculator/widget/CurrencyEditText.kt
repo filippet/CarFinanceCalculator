@@ -54,6 +54,10 @@ constructor(context: Context, attrs: AttributeSet? = null): EditText(context, at
     }
 
     private fun convertToInt(str: String): Int {
-        return str.toInt()
+        return if (!str.isEmpty()) {
+            str.toInt()
+        } else {
+            0
+        }
     }
 }
