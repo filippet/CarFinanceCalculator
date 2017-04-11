@@ -13,6 +13,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
+import android.text.method.PasswordTransformationMethod
+
+
 
 class CalculatorFragment : Fragment(), CalculatorContract.View {
 
@@ -54,6 +57,8 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     override fun onResume() {
         super.onResume()
         presenter.subscribe()
+        txCashDown.transformationMethod = NumbersOnlyKeyBoardTransformationMethod()
+        txTradeIn.transformationMethod = NumbersOnlyKeyBoardTransformationMethod()
     }
 
     override fun onPause() {
@@ -100,4 +105,10 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     }
     //
     //</CalculatorContract.View implementation>
+
+    private class NumbersOnlyKeyBoardTransformationMethod : PasswordTransformationMethod() {
+        override fun getTransformation(source: CharSequence, view: View): CharSequence {
+            return source
+        }
+    }
 }

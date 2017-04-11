@@ -1,131 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_vehicle_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="48,801"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_payment_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$736* Monthly"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp"
+        android:elevation="2dp">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_term"
+                android:id="@+id/tv_vehicle_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="84 Months"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="8dp"
+                android:text="$48,801"/>
 
-            <TextView
-                android:id="@+id/tv_rate"
-                android:layout_width="wrap_content"
+            <include layout="@layout/divider_line" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_payment_amount"
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="56dp"
+                    android:paddingTop="18dp"
+                    android:paddingLeft="8dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/red_tag"
+                    android:text="$736* Monthly"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_term"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:text="84 Months"/>
+
+                    <TextView
+                        android:id="@+id/tv_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:text="6.99% Financing"/>
+
+                </LinearLayout>
+
+                <ToggleButton
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="8dp"
+                    android:textOn=""
+                    android:textOff=""
+                    android:background="@drawable/ic_collapse"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/divider_line" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="6.99% Financing"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+
+                <TextView
+                    android:id="@+id/tv_min_term"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:text="36 mo"/>
+
+                <TextView
+                    android:id="@+id/tv_max_term"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:text="84 mo"/>
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sb_term_months"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rg_payment_frequency"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/rb_monthly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/monthly"/>
+
+                <RadioButton
+                    android:id="@+id/rb_biweekly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bi_weekly"/>
+
+                <RadioButton
+                    android:id="@+id/rb_weekly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weekly"/>
+
+            </RadioGroup>
+
+            <include layout="@layout/divider_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <TextView
+                    android:id="@+id/tv_cash_down"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:text="@string/cash_down"/>
+
+                <EditText
+                    android:id="@+id/tx_cash_down"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:inputType="numberPassword"
+                    android:text="$0"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/divider_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <TextView
+                    android:id="@+id/tv_trade_in"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:text="@string/trade_in"/>
+
+                <EditText
+                    android:id="@+id/tx_trade_in"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:inputType="numberPassword"
+                    android:text="$0"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/divider_line" />
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_min_term"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="36 mo"/>
-
-        <TextView
-            android:id="@+id/tv_max_term"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="84 mo"/>
-
-    </LinearLayout>
-
-    <SeekBar
-        android:id="@+id/sb_term_months"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <RadioGroup
-        android:id="@+id/rg_payment_frequency"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/rb_monthly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/monthly"/>
-
-        <RadioButton
-            android:id="@+id/rb_biweekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bi_weekly"/>
-
-        <RadioButton
-            android:id="@+id/rb_weekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/weekly"/>
-
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_cash_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cash_down"/>
-
-        <EditText
-            android:id="@+id/tx_cash_down"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="$0"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_trade_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/trade_in"/>
-
-        <EditText
-            android:id="@+id/tx_trade_in"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="$0"/>
-
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
