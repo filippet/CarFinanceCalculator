@@ -29,6 +29,9 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
         fun newInstance(): CalculatorFragment {
             return CalculatorFragment()
         }
+
+        private val KEY_CASH_DOWN = "KEY_CASH_DOWN"
+        private val KEY_TRADE_IN  = "KEY_TRADE_IN"
     }
 
     @BindView(R.id.tv_vehicle_price    ) lateinit var tvVehiclePrice     : TextView
@@ -173,4 +176,48 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
             PaymentFrequency.WEEKLY    -> R.id.rb_weekly
         }
     }
+
+
+    // The following are needed to save and restore the states of the cash down and trade in
+    // EditText controls.
+    // This is required as they are implemented via the inclusion of a view layout.  The problem
+    // with that is the EditText controls having the same resource ID, which prevents us from
+    // relying on the standard view state saving/restoring mechanism.
+    //
+    // The proper way to do this is embedding the mechanism in the controls themselves
+    // (via SparseArrays), but due the lack of time, this will have to do.
+    //
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if (outState != null) {
+            outState.saveCashDown(txCashDown.getAmount())
+            outState.saveTradeIn(txTradeIn.getAmount())
+        }
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        if (savedInstanceState != null) {
+            txCashDown.setAmount(savedInstanceState.cashDown())
+            txTradeIn.setAmount(savedInstanceState.tradeIn())
+        }
+    }
+
+    private fun Bundle.cashDown(): Int {
+        return this.getInt(KEY_CASH_DOWN)
+    }
+
+    private fun Bundle.tradeIn(): Int {
+        return this.getInt(KEY_TRADE_IN)
+    }
+
+    private fun Bundle.saveCashDown(amount: Int) {
+        this.putInt(KEY_CASH_DOWN, amount)
+    }
+
+    private fun Bundle.saveTradeIn(amount: Int) {
+        this.putInt(KEY_TRADE_IN, amount)
+    }
+
 }

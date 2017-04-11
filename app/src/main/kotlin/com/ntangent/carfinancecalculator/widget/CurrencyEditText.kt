@@ -47,6 +47,11 @@ constructor(context: Context, attrs: AttributeSet? = null): EditText(context, at
         return convertToInt(this.text.toString())
     }
 
+    fun setAmount(amount: Int) {
+        this.value = amount
+        this.setText(value.toString())
+    }
+
     private fun notifyOnValueChangeListener() {
         if (onValueChangeListener != null) {
             onValueChangeListener!!.newValue(value)
