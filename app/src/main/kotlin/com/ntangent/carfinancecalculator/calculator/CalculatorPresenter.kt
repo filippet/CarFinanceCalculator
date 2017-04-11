@@ -34,7 +34,9 @@ class CalculatorPresenter @Inject constructor (
     }
 
     override fun termMonthsChanged(value: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (lastLoanTerms.isNotEmpty()) {
+            setView(lastLoanTerms[0])
+        }
     }
 
     override fun paymentFrequencyChanged(value: PaymentFrequency) {
@@ -67,8 +69,10 @@ class CalculatorPresenter @Inject constructor (
 
     private fun setView(financeParams: FinanceParams) {
         val vehiclePrice = financeParams.vehiclePrice
-        val termInMonths = financeParams.termRates[0].term
-        val annualInterestRate = financeParams.termRates[0].rate
+
+        val selectedTermIndex = view.getSelectedTermIndex()
+        val annualInterestRate = financeParams.termRates[selectedTermIndex].rate
+        val termInMonths = financeParams.termRates[selectedTermIndex].term
 
         val paymentFrequency = view.getPaymentFrequency()
         val cashDownAmount = view.getCashDownAmount()
@@ -87,15 +91,23 @@ class CalculatorPresenter @Inject constructor (
             setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
             setPaymentAmount(stringFormatter.paymentAmount(payment, paymentFrequency))
             setTerm(stringFormatter.term(termInMonths))
+            setTermBounds(createTermInfo(financeParams, selectedTermIndex))
             setRate(stringFormatter.rate(annualInterestRate))
-            setMinTermMonths(stringFormatter.minTermMonths(financeParams.minTerm()))
-            setMaxTermMonths(stringFormatter.maxTermMonths(financeParams.maxTerm()))
             setPaymentFrequency(paymentFrequency)
         }
     }
 
 
     //TODO: Move these methods to domain
+    private fun createTermInfo(financeParams: FinanceParams, selectedTermIndex: Int): TermInfo {
+        val termRange = ((financeParams.maxTerm() - financeParams.minTerm()) / 12)
+        return TermInfo(
+                stringFormatter.minTermMonths(financeParams.minTerm()),
+                stringFormatter.maxTermMonths(financeParams.maxTerm()),
+                termRange,
+                selectedTermIndex)
+    }
+
     private fun FinanceParams.minTerm(): Int {
         return termRates.first().term
     }

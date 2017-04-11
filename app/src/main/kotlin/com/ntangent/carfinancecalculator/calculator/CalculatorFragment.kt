@@ -69,6 +69,19 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
         txTradeIn = vTradeIn.findViewById(R.id.tx_value) as CurrencyEditText
         tvTradeIn.setText(R.string.trade_in)
 
+        sbTermMonths.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                presenter.termMonthsChanged(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
+
         rgPaymentFrequency.setOnCheckedChangeListener {
             group, checkedId ->
             val paymentFrequency = paymentFrequencyResIdToValue(checkedId)
@@ -122,20 +135,23 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
         tvTerm.text = value
     }
 
+    override fun setTermBounds(value: TermInfo) {
+        setMinTermMonths(value.minTerm)
+        setMaxTermMonths(value.maxTerm)
+        sbTermMonths.max = value.termRange
+        sbTermMonths.progress = value.selectedTerm
+    }
+
     override fun setRate(value: String) {
         tvRate.text = value
     }
 
-    override fun setMinTermMonths(value: String) {
-        tvMinTerm.text = value
-    }
-
-    override fun setMaxTermMonths(value: String) {
-        tvMaxTerm.text = value
-    }
-
     override fun setPaymentFrequency(value: PaymentFrequency) {
         rgPaymentFrequency.check(paymentFrequencyValueToResId(value))
+    }
+
+    override fun getSelectedTermIndex(): Int {
+        return sbTermMonths.progress
     }
 
     override fun getPaymentFrequency(): PaymentFrequency {
@@ -151,6 +167,14 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     }
     //
     //</CalculatorContract.View implementation>
+
+    fun setMinTermMonths(value: String) {
+        tvMinTerm.text = value
+    }
+
+    fun setMaxTermMonths(value: String) {
+        tvMaxTerm.text = value
+    }
 
     private class NumbersOnlyKeyBoardTransformationMethod : PasswordTransformationMethod() {
         override fun getTransformation(source: CharSequence, view: View): CharSequence {

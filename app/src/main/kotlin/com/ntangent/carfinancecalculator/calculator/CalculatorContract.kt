@@ -4,6 +4,13 @@ import com.ntangent.carfinancecalculator.BasePresenter
 import com.ntangent.carfinancecalculator.BaseView
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 
+data class TermInfo(
+        val minTerm: String,
+        val maxTerm: String,
+        val termRange: Int,
+        val selectedTerm: Int
+)
+
 class CalculatorContract {
 
     interface Presenter: BasePresenter {
@@ -23,13 +30,13 @@ class CalculatorContract {
 
         fun setTerm(value: String)
 
+        fun setTermBounds(value: TermInfo)
+
         fun setRate(value: String)
 
-        fun setMinTermMonths(value: String)
-
-        fun setMaxTermMonths(value: String)
-
         fun setPaymentFrequency(value: PaymentFrequency)
+
+        fun getSelectedTermIndex(): Int
 
         fun getPaymentFrequency(): PaymentFrequency
 
