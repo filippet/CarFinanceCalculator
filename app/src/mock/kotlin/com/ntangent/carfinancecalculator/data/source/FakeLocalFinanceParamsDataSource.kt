@@ -11,8 +11,8 @@ import io.reactivex.Observable
  */
 class FakeLocalFinanceParamsDataSource: FinanceParamsDataSource {
     override fun getFinanceParams(): Observable<List<FinanceParams>> {
-        return Observable.just(makeParams())
-//        return Observable.just(readFromFakeJson())
+//        return Observable.just(makeParams())
+        return Observable.just(readFromFakeJson())
     }
 
     private fun makeParams(): List<FinanceParams> {

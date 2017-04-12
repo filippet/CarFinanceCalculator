@@ -11,10 +11,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
-import com.ntangent.carfinancecalculator.calculator.domain.FinanceTermRate
 
 
-class RecyclerViewFragment : Fragment() {
+class RecyclerViewFragment : Fragment(), RecyclerViewContract.View {
 
     companion object {
         /**
@@ -29,8 +28,10 @@ class RecyclerViewFragment : Fragment() {
     }
 
     @BindView(R.id.recyclerView) lateinit var recyclerView: RecyclerView
+
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerViewAdapter: CalculatorsRecyclerViewAdapter
+    private lateinit var presenter: RecyclerViewContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,35 +44,32 @@ class RecyclerViewFragment : Fragment() {
         linearLayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = linearLayoutManager
 
-        val financeParamsList = makeParams()
-        recyclerViewAdapter = CalculatorsRecyclerViewAdapter(financeParamsList)
+        recyclerViewAdapter = CalculatorsRecyclerViewAdapter(arrayListOf())
         recyclerView.adapter = recyclerViewAdapter
 
         return view
     }
 
-
-    private fun makeParams(): List<FinanceParams> {
-        return arrayListOf(
-                FinanceParams(
-                        vehiclePrice = 48801,
-                        termRates = arrayListOf(
-                                FinanceTermRate(24, 9.99),
-                                FinanceTermRate(36, 8.99),
-                                FinanceTermRate(48, 7.99),
-                                FinanceTermRate(60, 6.99),
-                                FinanceTermRate(72, 5.99)
-                        )
-                ),
-
-                FinanceParams(
-                        vehiclePrice = 5600,
-                        termRates = arrayListOf(
-                                FinanceTermRate(12, 4.99),
-                                FinanceTermRate(24, 3.99),
-                                FinanceTermRate(36, 2.99)
-                        )
-                )
-        )
+    override fun onResume() {
+        super.onResume()
+        presenter.subscribe()
     }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.unsubscribe()
+    }
+
+    //<RecyclerViewContract.View implementation>
+    //
+    override fun setPresenter(presenter: RecyclerViewContract.Presenter) {
+        this.presenter = presenter
+    }
+
+    override fun setFinanceParamsList(financeParamsList: List<FinanceParams>) {
+        recyclerViewAdapter = CalculatorsRecyclerViewAdapter(financeParamsList)
+        recyclerView.adapter = recyclerViewAdapter
+    }
+    //
+    //</RecyclerViewContract.View implementation>
 }
