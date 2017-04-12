@@ -14,7 +14,7 @@ class CalcItemPresenter(
 
 ): CalculatorContract.Presenter {
 
-    private lateinit var financeParams: FinanceParams
+    private var financeParams: FinanceParams? = null
 
     @Inject
     fun setupListeners() {
@@ -49,11 +49,12 @@ class CalcItemPresenter(
     }
 
     private fun setView() {
-        val vehiclePrice = financeParams.vehiclePrice
+        if (financeParams == null) return
+        val vehiclePrice = financeParams!!.vehiclePrice
 
         val selectedTermIndex = view.getSelectedTermIndex()
-        val annualInterestRate = financeParams.termRates[selectedTermIndex].rate
-        val termInMonths = financeParams.termRates[selectedTermIndex].term
+        val annualInterestRate = financeParams!!.termRates[selectedTermIndex].rate
+        val termInMonths = financeParams!!.termRates[selectedTermIndex].term
 
         val paymentFrequency = view.getPaymentFrequency()
         val cashDownAmount = view.getCashDownAmount()
@@ -69,10 +70,10 @@ class CalcItemPresenter(
         ).payment
 
         with(view) {
-            setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
+            setVehiclePrice(stringFormatter.vehiclePrice(financeParams!!.vehiclePrice))
             setPaymentAmount(stringFormatter.paymentAmount(payment, paymentFrequency))
             setTerm(stringFormatter.term(termInMonths))
-            setTermBounds(createTermInfo(financeParams, selectedTermIndex, stringFormatter))
+            setTermBounds(createTermInfo(financeParams!!, selectedTermIndex, stringFormatter))
             setRate(stringFormatter.rate(annualInterestRate))
             setPaymentFrequency(paymentFrequency)
         }

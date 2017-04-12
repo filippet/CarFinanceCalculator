@@ -18,15 +18,26 @@ import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import com.ntangent.carfinancecalculator.widget.CurrencyEditText
 
+class CalculatorItemState(
+        var cashDown: Int = 0,
+        var tradeIn: Int = 0,
+        var termIndex: Int = 0,
+        var paymentFrequency: PaymentFrequency = PaymentFrequency.MONTHLY
+)
+
+class CalculatorItemData(
+        val financeParams: FinanceParams,
+        var state: CalculatorItemState = CalculatorItemState()
+)
+
 class CalculatorsAdapter(
-        private val financeParamsList: List<FinanceParams>
+        val itemDataList: List<CalculatorItemData>
 
 ): RecyclerView.Adapter<CalculatorsAdapter.CalculatorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalculatorViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.calculator_card, parent, false)
-
 
         val holder = CalculatorViewHolder(inflatedView)
         val presenter = CalcItemPresenter(
@@ -38,12 +49,12 @@ class CalculatorsAdapter(
 
 
     override fun getItemCount(): Int {
-        return financeParamsList.size
+        return itemDataList.size
     }
 
     override fun onBindViewHolder(holder: CalculatorViewHolder, position: Int) {
-        val financeParams = financeParamsList[position]
-        holder.bindFinanceParams(financeParams)
+        val itemData = itemDataList[position]
+        holder.bindItemData(itemData)
     }
 
 
@@ -67,7 +78,8 @@ class CalculatorsAdapter(
         private var tvTradeIn: TextView
         private var txTradeIn: CurrencyEditText
 
-        private lateinit var presenter: CalculatorContract.Presenter
+        private var presenter: CalculatorContract.Presenter? = null
+        private lateinit var itemData: CalculatorItemData
 
         init {
             ButterKnife.bind(this, v)
@@ -82,7 +94,10 @@ class CalculatorsAdapter(
 
             sbTermMonths.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    presenter.termMonthsChanged(progress)
+                    itemData.state.termIndex = progress
+                    if (presenter != null) {
+                        presenter!!.termMonthsChanged(progress)
+                    }
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -95,24 +110,32 @@ class CalculatorsAdapter(
             rgPaymentFrequency.setOnCheckedChangeListener {
                 group, checkedId ->
                 val paymentFrequency = paymentFrequencyResIdToValue(checkedId)
-                presenter.paymentFrequencyChanged(paymentFrequency)
+                itemData.state.paymentFrequency = paymentFrequency
+                if (presenter != null) {
+                    presenter!!.paymentFrequencyChanged(paymentFrequency)
+                }
             }
 
 
             txCashDown.transformationMethod = NumbersOnlyKeyBoardTransformationMethod()
             txCashDown.subscribeOnValueChangeListener(object: CurrencyEditText.OnValueChangeListener {
                 override fun newValue(value: Int) {
-                    presenter.cashDownAmountChanged(value)
+                    itemData.state.cashDown = value
+                    if (presenter != null) {
+                        presenter!!.cashDownAmountChanged(value)
+                    }
                 }
             })
 
             txTradeIn.transformationMethod = NumbersOnlyKeyBoardTransformationMethod()
             txTradeIn.subscribeOnValueChangeListener(object: CurrencyEditText.OnValueChangeListener {
                 override fun newValue(value: Int) {
-                    presenter.tradeInAmountChanged(value)
+                    itemData.state.tradeIn = value
+                    if (presenter != null) {
+                        presenter!!.tradeInAmountChanged(value)
+                    }
                 }
             })
-
         }
 
 
@@ -121,8 +144,15 @@ class CalculatorsAdapter(
         }
 
 
-        fun bindFinanceParams(financeParams: FinanceParams) {
-            presenter.setFinanceParams(financeParams)
+        fun bindItemData(itemData: CalculatorItemData) {
+            this.itemData = itemData
+            txCashDown.setAmount(itemData.state.cashDown)
+            txTradeIn.setAmount(itemData.state.tradeIn)
+            sbTermMonths.progress = itemData.state.termIndex
+            rgPaymentFrequency.check(paymentFrequencyValueToResId(itemData.state.paymentFrequency))
+            if (presenter != null) {
+                presenter!!.setFinanceParams(itemData.financeParams)
+            }
         }
 
         override fun setVehiclePrice(value: String) {
