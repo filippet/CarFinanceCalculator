@@ -14,7 +14,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.calculator.CalculatorContract
-import com.ntangent.carfinancecalculator.calculator.TermInfo
+import com.ntangent.carfinancecalculator.calculator.TermInfoViewModel
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.widget.CurrencyEditText
 
@@ -137,7 +137,7 @@ class SingleCalcFragment : Fragment(), CalculatorContract.View {
         tvTerm.text = value
     }
 
-    override fun setTermBounds(value: TermInfo) {
+    override fun setTermBounds(value: TermInfoViewModel) {
         setMinTermMonths(value.minTerm)
         setMaxTermMonths(value.maxTerm)
         sbTermMonths.max = value.termRange

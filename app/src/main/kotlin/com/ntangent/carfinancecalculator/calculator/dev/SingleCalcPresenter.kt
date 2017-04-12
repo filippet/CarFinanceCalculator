@@ -2,7 +2,8 @@ package com.ntangent.carfinancecalculator.calculator.dev
 
 import com.ntangent.carfinancecalculator.DefaultUseCaseObserver
 import com.ntangent.carfinancecalculator.calculator.CalculatorContract
-import com.ntangent.carfinancecalculator.calculator.TermInfo
+import com.ntangent.carfinancecalculator.calculator.TermInfoViewModel
+import com.ntangent.carfinancecalculator.calculator.createTermInfo
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
@@ -97,28 +98,9 @@ class SingleCalcPresenter @Inject constructor (
             setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
             setPaymentAmount(stringFormatter.paymentAmount(payment, paymentFrequency))
             setTerm(stringFormatter.term(termInMonths))
-            setTermBounds(createTermInfo(financeParams, selectedTermIndex))
+            setTermBounds(createTermInfo(financeParams, selectedTermIndex, stringFormatter))
             setRate(stringFormatter.rate(annualInterestRate))
             setPaymentFrequency(paymentFrequency)
         }
-    }
-
-
-    //TODO: Move these methods to domain
-    private fun createTermInfo(financeParams: FinanceParams, selectedTermIndex: Int): TermInfo {
-        val termRange = ((financeParams.maxTerm() - financeParams.minTerm()) / 12)
-        return TermInfo(
-                stringFormatter.minTermMonths(financeParams.minTerm()),
-                stringFormatter.maxTermMonths(financeParams.maxTerm()),
-                termRange,
-                selectedTermIndex)
-    }
-
-    private fun FinanceParams.minTerm(): Int {
-        return termRates.first().term
-    }
-
-    private fun FinanceParams.maxTerm(): Int {
-        return termRates.last().term
     }
 }

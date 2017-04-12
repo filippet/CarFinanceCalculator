@@ -1,7 +1,7 @@
 package com.ntangent.carfinancecalculator.calculator.dev
 
 import com.ntangent.carfinancecalculator.calculator.CalculatorContract
-import com.ntangent.carfinancecalculator.calculator.TermInfo
+import com.ntangent.carfinancecalculator.calculator.TermInfoViewModel
 import com.ntangent.carfinancecalculator.calculator.dev.SingleCalcPresenter
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
@@ -70,7 +70,7 @@ class SingleCalcPresenter_Test {
         verifyView().setPaymentAmount("2307")
         verifyView().setTerm(PARAMS_0_TERM_0.toString())
         verifyView().setRate(PARAMS_0_RATE_0.toString())
-        val termInfo = TermInfo(PARAMS_0_TERM_0.toString(), PARAMS_0_TERM_4.toString(), PARAMS_0_TERM_4 - PARAMS_0_TERM_0, 0)
+        val termInfo = TermInfoViewModel(PARAMS_0_TERM_0.toString(), PARAMS_0_TERM_4.toString(), PARAMS_0_TERM_4 - PARAMS_0_TERM_0, 0)
         verifyView().setTermBounds(termInfo)
         verifyView().setPaymentFrequency(PaymentFrequency.MONTHLY)
     }

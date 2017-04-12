@@ -137,7 +137,7 @@ class CalculatorsAdapter(
             tvTerm.text = value
         }
 
-        override fun setTermBounds(value: TermInfo) {
+        override fun setTermBounds(value: TermInfoViewModel) {
             setMinTermMonths(value.minTerm)
             setMaxTermMonths(value.maxTerm)
             sbTermMonths.max = value.termRange

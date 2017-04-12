@@ -22,35 +22,33 @@ class CalcItemPresenter(
     }
 
     override fun subscribe() {
-//        retrieveLoanTerms()
     }
 
     override fun unsubscribe() {
-//        getLoanTermsUseCase.unsubscribe()
     }
 
     override fun setFinanceParams(value: FinanceParams) {
         financeParams = value
-        setView(financeParams)
+        setView()
     }
 
     override fun termMonthsChanged(value: Int) {
-        setView(financeParams)
+        setView()
     }
 
     override fun paymentFrequencyChanged(value: PaymentFrequency) {
-        setView(financeParams)
+        setView()
     }
 
     override fun cashDownAmountChanged(value: Int) {
-        setView(financeParams)
+        setView()
     }
 
     override fun tradeInAmountChanged(value: Int) {
-        setView(financeParams)
+        setView()
     }
 
-    private fun setView(financeParams: FinanceParams) {
+    private fun setView() {
         val vehiclePrice = financeParams.vehiclePrice
 
         val selectedTermIndex = view.getSelectedTermIndex()
@@ -74,28 +72,9 @@ class CalcItemPresenter(
             setVehiclePrice(stringFormatter.vehiclePrice(financeParams.vehiclePrice))
             setPaymentAmount(stringFormatter.paymentAmount(payment, paymentFrequency))
             setTerm(stringFormatter.term(termInMonths))
-            setTermBounds(createTermInfo(financeParams, selectedTermIndex))
+            setTermBounds(createTermInfo(financeParams, selectedTermIndex, stringFormatter))
             setRate(stringFormatter.rate(annualInterestRate))
             setPaymentFrequency(paymentFrequency)
         }
-    }
-
-
-    //TODO: Move these methods to domain
-    private fun createTermInfo(financeParams: FinanceParams, selectedTermIndex: Int): TermInfo {
-        val termRange = ((financeParams.maxTerm() - financeParams.minTerm()) / 12)
-        return TermInfo(
-                stringFormatter.minTermMonths(financeParams.minTerm()),
-                stringFormatter.maxTermMonths(financeParams.maxTerm()),
-                termRange,
-                selectedTermIndex)
-    }
-
-    private fun FinanceParams.minTerm(): Int {
-        return termRates.first().term
-    }
-
-    private fun FinanceParams.maxTerm(): Int {
-        return termRates.last().term
     }
 }
