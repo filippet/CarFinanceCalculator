@@ -7,11 +7,11 @@ import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 
-class RecyclerViewFragmentPresenter @Inject constructor(
+class CalculatorsPresenter @Inject constructor(
         private val getLoanTermsUseCase: GetVehicleLoanTermsUseCase,
-        private val view: RecyclerViewContract.View
+        private val view: CalcItemContract.View
 
-): RecyclerViewContract.Presenter {
+): CalcItemContract.Presenter {
 
     var lastLoanTerms: List<FinanceParams> = arrayListOf()
 

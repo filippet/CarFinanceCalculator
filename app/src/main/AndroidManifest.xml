@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".calculator.dev.SingleCalcActivity">
         </activity>
-        <activity android:name=".calculator.RecyclerViewActivity">
+        <activity android:name=".calculator.CalculatorsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

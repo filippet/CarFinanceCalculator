@@ -18,10 +18,10 @@ import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import com.ntangent.carfinancecalculator.widget.CurrencyEditText
 
-class CalculatorsRecyclerViewAdapter(
+class CalculatorsAdapter(
         private val financeParamsList: List<FinanceParams>
 
-): RecyclerView.Adapter<CalculatorsRecyclerViewAdapter.CalculatorViewHolder>() {
+): RecyclerView.Adapter<CalculatorsAdapter.CalculatorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalculatorViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
@@ -29,7 +29,7 @@ class CalculatorsRecyclerViewAdapter(
 
 
         val holder = CalculatorViewHolder(inflatedView)
-        val presenter = RecyclerViewPresenter(
+        val presenter = CalcItemPresenter(
                 holder, LoanCalculator(), CalculatorStringFormatterImpl(parent.context)
         )
         holder.setPresenter(presenter)

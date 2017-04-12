@@ -13,25 +13,25 @@ import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 
 
-class RecyclerViewFragment : Fragment(), RecyclerViewContract.View {
+class CalculatorsFragment : Fragment(), CalcItemContract.View {
 
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment.
          *
-         * @return A new instance of fragment RecyclerViewFragment.
+         * @return A new instance of fragment CalculatorsFragment.
          */
-        fun newInstance(): RecyclerViewFragment {
-            return RecyclerViewFragment()
+        fun newInstance(): CalculatorsFragment {
+            return CalculatorsFragment()
         }
     }
 
     @BindView(R.id.recyclerView) lateinit var recyclerView: RecyclerView
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var recyclerViewAdapter: CalculatorsRecyclerViewAdapter
-    private lateinit var presenter: RecyclerViewContract.Presenter
+    private lateinit var adapter: CalculatorsAdapter
+    private lateinit var presenter: CalcItemContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,8 @@ class RecyclerViewFragment : Fragment(), RecyclerViewContract.View {
         linearLayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = linearLayoutManager
 
-        recyclerViewAdapter = CalculatorsRecyclerViewAdapter(arrayListOf())
-        recyclerView.adapter = recyclerViewAdapter
+        adapter = CalculatorsAdapter(arrayListOf())
+        recyclerView.adapter = adapter
 
         return view
     }
@@ -60,16 +60,16 @@ class RecyclerViewFragment : Fragment(), RecyclerViewContract.View {
         presenter.unsubscribe()
     }
 
-    //<RecyclerViewContract.View implementation>
+    //<CalcItemContract.View implementation>
     //
-    override fun setPresenter(presenter: RecyclerViewContract.Presenter) {
+    override fun setPresenter(presenter: CalcItemContract.Presenter) {
         this.presenter = presenter
     }
 
     override fun setFinanceParamsList(financeParamsList: List<FinanceParams>) {
-        recyclerViewAdapter = CalculatorsRecyclerViewAdapter(financeParamsList)
-        recyclerView.adapter = recyclerViewAdapter
+        adapter = CalculatorsAdapter(financeParamsList)
+        recyclerView.adapter = adapter
     }
     //
-    //</RecyclerViewContract.View implementation>
+    //</CalcItemContract.View implementation>
 }

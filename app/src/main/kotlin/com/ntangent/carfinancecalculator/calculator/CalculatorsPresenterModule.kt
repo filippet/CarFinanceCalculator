@@ -12,11 +12,11 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class RecyclerViewFragmentPresenterModule(
-        private val view: RecyclerViewContract.View ) {
+class CalculatorsPresenterModule(
+        private val view: CalcItemContract.View ) {
 
     @Provides
-    internal fun provideRecyclerViewContractView(): RecyclerViewContract.View {
+    internal fun provideRecyclerViewContractView(): CalcItemContract.View {
         return view
     }
 
@@ -43,8 +43,8 @@ class RecyclerViewFragmentPresenterModule(
     @Provides
     internal fun providesRecyclerViewContractPresenter(
             getLoanTermsUseCase: GetVehicleLoanTermsUseCase,
-            view: RecyclerViewContract.View
-    ): RecyclerViewContract.Presenter {
-        return RecyclerViewFragmentPresenter(getLoanTermsUseCase, view)
+            view: CalcItemContract.View
+    ): CalcItemContract.Presenter {
+        return CalculatorsPresenter(getLoanTermsUseCase, view)
     }
 }

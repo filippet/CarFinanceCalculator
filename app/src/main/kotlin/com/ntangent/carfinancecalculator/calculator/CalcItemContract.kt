@@ -4,10 +4,8 @@ import com.ntangent.carfinancecalculator.BasePresenter
 import com.ntangent.carfinancecalculator.BaseView
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 
-interface RecyclerViewContract {
-    interface Presenter: BasePresenter {
-
-    }
+interface CalcItemContract {
+    interface Presenter: BasePresenter
 
     interface View: BaseView<Presenter> {
 

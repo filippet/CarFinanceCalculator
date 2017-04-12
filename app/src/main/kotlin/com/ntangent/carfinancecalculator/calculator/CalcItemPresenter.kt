@@ -7,7 +7,7 @@ import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import javax.inject.Inject
 
 
-class RecyclerViewPresenter(
+class CalcItemPresenter(
         private val view: CalculatorContract.View,
         private val loanCalculator: LoanCalculator,
         private val stringFormatter: CalculatorStringFormatter

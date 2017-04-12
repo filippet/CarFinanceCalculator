@@ -8,9 +8,9 @@ import dagger.Component
 @FragmentScope
 @Component(
         dependencies = arrayOf(FinanceParamsRepositoryComponent::class),
-        modules = arrayOf(RecyclerViewFragmentPresenterModule::class, ApplicationModule::class)
+        modules = arrayOf(CalculatorsPresenterModule::class, ApplicationModule::class)
 )
-interface RecyclerViewFragmentComponent {
+interface CalculatorsComponent {
 
-    fun inject(recyclerViewActivity: RecyclerViewActivity)
+    fun inject(calculatorsActivity: CalculatorsActivity)
 }

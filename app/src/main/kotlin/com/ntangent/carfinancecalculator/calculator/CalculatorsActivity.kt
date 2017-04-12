@@ -14,11 +14,11 @@ import javax.inject.Inject
 /**
  * Created by filip on 4/11/17.
  */
-class RecyclerViewActivity : AppCompatActivity() {
+class CalculatorsActivity : AppCompatActivity() {
 
     private val FRAGMENT_CONTAINER_VIEW_RESOURCE_ID = R.id.v_content
 
-    @Inject lateinit var fragmentPresenter: RecyclerViewFragmentPresenter
+    @Inject lateinit var fragmentPresenter: CalculatorsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +29,10 @@ class RecyclerViewActivity : AppCompatActivity() {
         initiateInjector(fragment)
     }
 
-    private fun initiateInjector(recyclerViewFragment: RecyclerViewFragment) {
-        DaggerRecyclerViewFragmentComponent.builder()
-                .recyclerViewFragmentPresenterModule(
-                        RecyclerViewFragmentPresenterModule(recyclerViewFragment))
+    private fun initiateInjector(calculatorsFragment: CalculatorsFragment) {
+        DaggerCalculatorsComponent.builder()
+                .calculatorsPresenterModule(
+                        CalculatorsPresenterModule(calculatorsFragment))
                 .applicationModule(
                         ApplicationModule(applicationContext))
                 .financeParamsRepositoryComponent(
@@ -41,18 +41,18 @@ class RecyclerViewActivity : AppCompatActivity() {
                 .inject(this)
     }
 
-    private fun initializeFragment() : RecyclerViewFragment {
+    private fun initializeFragment() : CalculatorsFragment {
         val fragment = findFragment()
         if (fragment != null) return fragment
 
-        val newFragment = RecyclerViewFragment.newInstance()
+        val newFragment = CalculatorsFragment.newInstance()
         supportFragmentManager.addFragment(FRAGMENT_CONTAINER_VIEW_RESOURCE_ID, newFragment)
         return newFragment
     }
 
-    private fun findFragment(): RecyclerViewFragment? {
+    private fun findFragment(): CalculatorsFragment? {
         return supportFragmentManager.findFragmentById(
-                FRAGMENT_CONTAINER_VIEW_RESOURCE_ID) as RecyclerViewFragment?
+                FRAGMENT_CONTAINER_VIEW_RESOURCE_ID) as CalculatorsFragment?
     }
 
     @VisibleForTesting
