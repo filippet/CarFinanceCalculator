@@ -1,0 +1,200 @@
+[
+  {
+    "VehiclePrice": 48801,
+    "VehicleTermRates": [
+      {
+        "Term": 24,
+        "Rate": 6.99
+      },
+      {
+        "Term": 36,
+        "Rate": 5.99
+      },
+      {
+        "Term": 48,
+        "Rate": 8.99
+      },
+      {
+        "Term": 60,
+        "Rate": 7.99
+      },
+      {
+        "Term": 72,
+        "Rate": 7.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 5600,
+    "VehicleTermRates": [
+      {
+        "Term": 12,
+        "Rate": 6.99
+      },
+      {
+        "Term": 24,
+        "Rate": 5.99
+      },
+      {
+        "Term": 36,
+        "Rate": 7.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 48760,
+    "VehicleTermRates": [
+      {
+        "Term": 36,
+        "Rate": 6.99
+      },
+      {
+        "Term": 48,
+        "Rate": 5.99
+      },
+      {
+        "Term": 60,
+        "Rate": 4.99
+      },
+      {
+        "Term": 72,
+        "Rate": 3.99
+      },
+      {
+        "Term": 84,
+        "Rate": 3.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 78000,
+    "VehicleTermRates": [
+      {
+        "Term": 36,
+        "Rate": 5.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 1200,
+    "VehicleTermRates": [
+      {
+        "Term": 36,
+        "Rate": 6.99
+      },
+      {
+        "Term": 48,
+        "Rate": 5.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 45000,
+    "VehicleTermRates": [
+      {
+        "Term": 36,
+        "Rate": 6.99
+      },
+      {
+        "Term": 48,
+        "Rate": 5.99
+      },
+      {
+        "Term": 60,
+        "Rate": 4.99
+      },
+      {
+        "Term": 72,
+        "Rate": 3.99
+      },
+      {
+        "Term": 84,
+        "Rate": 3.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 64000,
+    "VehicleTermRates": [
+      {
+        "Term": 48,
+        "Rate": 5.99
+      },
+      {
+        "Term": 60,
+        "Rate": 4.99
+      },
+      {
+        "Term": 72,
+        "Rate": 3.99
+      },
+      {
+        "Term": 84,
+        "Rate": 3.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 17000,
+    "VehicleTermRates": [
+      {
+        "Term": 72,
+        "Rate": 3.99
+      },
+      {
+        "Term": 84,
+        "Rate": 3.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 14000,
+    "VehicleTermRates": [
+      {
+        "Term": 60,
+        "Rate": 4.99
+      },
+      {
+        "Term": 72,
+        "Rate": 3.99
+      },
+      {
+        "Term": 84,
+        "Rate": 3.99
+      }
+    ]
+  },
+  {
+    "VehiclePrice": 65000,
+    "VehicleTermRates": [
+      {
+        "Term": 12,
+        "Rate": 6.99
+      },
+      {
+        "Term": 24,
+        "Rate": 5.99
+      },
+      {
+        "Term": 36,
+        "Rate": 6.99
+      },
+      {
+        "Term": 48,
+        "Rate": 5.99
+      },
+      {
+        "Term": 60,
+        "Rate": 4.99
+      },
+      {
+        "Term": 72,
+        "Rate": 3.99
+      },
+      {
+        "Term": 84,
+        "Rate": 3.99
+      }
+    ]
+  }
+]
