@@ -3,6 +3,7 @@ package com.ntangent.carfinancecalculator.calculator
 import com.ntangent.carfinancecalculator.BasePresenter
 import com.ntangent.carfinancecalculator.BaseView
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
+import com.ntangent.carfinancecalculator.data.FinanceParams
 
 data class TermInfo(
         val minTerm: String,
@@ -14,6 +15,8 @@ data class TermInfo(
 class CalculatorContract {
 
     interface Presenter: BasePresenter {
+        fun setFinanceParams(value: FinanceParams)
+
         fun termMonthsChanged(value: Int)
 
         fun paymentFrequencyChanged(value: PaymentFrequency)

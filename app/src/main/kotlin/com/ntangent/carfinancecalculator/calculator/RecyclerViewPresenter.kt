@@ -1,24 +1,20 @@
 package com.ntangent.carfinancecalculator.calculator
 
-import com.ntangent.carfinancecalculator.DefaultUseCaseObserver
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import com.ntangent.carfinancecalculator.calculator.domain.interactor.GetVehicleLoanTermsUseCase
 import com.ntangent.carfinancecalculator.data.FinanceParams
-import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 
-class CalculatorPresenter @Inject constructor (
-        private val getLoanTermsUseCase: GetVehicleLoanTermsUseCase,
+class RecyclerViewPresenter(
         private val view: CalculatorContract.View,
         private val loanCalculator: LoanCalculator,
         private val stringFormatter: CalculatorStringFormatter
 
 ): CalculatorContract.Presenter {
 
-    var lastLoanTerms: List<FinanceParams> = arrayListOf()
+    private lateinit var financeParams: FinanceParams
 
     @Inject
     fun setupListeners() {
@@ -26,49 +22,32 @@ class CalculatorPresenter @Inject constructor (
     }
 
     override fun subscribe() {
-        retrieveLoanTerms()
+//        retrieveLoanTerms()
     }
 
     override fun unsubscribe() {
-        getLoanTermsUseCase.unsubscribe()
+//        getLoanTermsUseCase.unsubscribe()
     }
 
     override fun setFinanceParams(value: FinanceParams) {
-        //Not needed here
+        financeParams = value
+        setView(financeParams)
     }
 
     override fun termMonthsChanged(value: Int) {
-        if (lastLoanTerms.isNotEmpty()) {
-            setView(lastLoanTerms[0])
-        }
+        setView(financeParams)
     }
 
     override fun paymentFrequencyChanged(value: PaymentFrequency) {
-        if (lastLoanTerms.isNotEmpty()) {
-            setView(lastLoanTerms[0])
-        }
+        setView(financeParams)
     }
 
     override fun cashDownAmountChanged(value: Int) {
-        setView(lastLoanTerms[0])
+        setView(financeParams)
     }
 
     override fun tradeInAmountChanged(value: Int) {
-        setView(lastLoanTerms[0])
-    }
-
-    private fun retrieveLoanTerms() {
-        val observer = newRetrieveLoanTermsObserver()
-        getLoanTermsUseCase.execute(GetVehicleLoanTermsUseCase.params(), observer)
-    }
-
-    private fun newRetrieveLoanTermsObserver(): DisposableObserver<List<FinanceParams>> {
-        return object : DefaultUseCaseObserver<List<FinanceParams>>() {
-            override fun onNext(value: List<FinanceParams>) {
-                lastLoanTerms = value
-                setView(lastLoanTerms[0])
-            }
-        }
+        setView(financeParams)
     }
 
     private fun setView(financeParams: FinanceParams) {

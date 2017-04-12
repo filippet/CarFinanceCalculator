@@ -188,7 +188,7 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
             R.id.rb_biweekly -> PaymentFrequency.BI_WEEKLY
             R.id.rb_weekly   -> PaymentFrequency.WEEKLY
             else -> {
-                throw IllegalStateException("Unknown payment frequency radio button id[$id]")
+                throw IllegalStateException("Unknown payment frequency radio button id[$resId]")
             }
         }
     }

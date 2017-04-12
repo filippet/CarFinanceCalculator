@@ -1,6 +1,8 @@
 package com.ntangent.carfinancecalculator.widget
 
 import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.widget.EditText
 
@@ -65,4 +67,5 @@ constructor(context: Context, attrs: AttributeSet? = null): EditText(context, at
             0
         }
     }
+
 }
