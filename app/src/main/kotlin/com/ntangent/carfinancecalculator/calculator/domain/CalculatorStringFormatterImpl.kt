@@ -30,8 +30,13 @@ class CalculatorStringFormatterImpl @Inject constructor(context: Context): Calcu
 
     override fun paymentAmount(value: Int, paymentFrequency: PaymentFrequency): String {
         val amount = toCurrency(value)
-        val paymentFrequencyName = loadPaymentFrequencyName(paymentFrequency)
-        return res.getString(R.string.payment_amount_template, amount, paymentFrequencyName)
+
+        val message = if (value > 0) {
+            loadPaymentFrequencyName(paymentFrequency)
+        } else {
+            res.getString(R.string.no_loan_required)
+        }
+        return res.getString(R.string.payment_amount_template, amount, message)
     }
 
     private fun loadPaymentFrequencyName(paymentFrequency: PaymentFrequency): String {

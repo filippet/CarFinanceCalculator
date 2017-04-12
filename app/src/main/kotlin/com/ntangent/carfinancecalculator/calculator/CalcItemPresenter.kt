@@ -1,9 +1,6 @@
 package com.ntangent.carfinancecalculator.calculator
 
-import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
-import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
-import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.*
 import javax.inject.Inject
 
 
@@ -60,14 +57,13 @@ class CalcItemPresenter(
         val cashDownAmount = view.getCashDownAmount()
         val tradeInAmount = view.getTradeInAmount()
 
-        val payment = loanCalculator.calculateLoan(
-                vehiclePrice = vehiclePrice,
-                termInMonths = termInMonths,
-                annualInterestRate = annualInterestRate,
-                paymentFrequency = paymentFrequency,
-                cashDownAmount = cashDownAmount,
-                tradeInAmount = tradeInAmount
-        ).payment
+        val payment = calculatePayment(
+                    vehiclePrice = vehiclePrice,
+                    termInMonths = termInMonths,
+                    annualInterestRate = annualInterestRate,
+                    paymentFrequency = paymentFrequency,
+                    cashDownAmount = cashDownAmount,
+                    tradeInAmount = tradeInAmount)
 
         with(view) {
             setVehiclePrice(stringFormatter.vehiclePrice(financeParams!!.vehiclePrice))
@@ -76,6 +72,28 @@ class CalcItemPresenter(
             setTermBounds(createTermInfo(financeParams!!, selectedTermIndex, stringFormatter))
             setRate(stringFormatter.rate(annualInterestRate))
             setPaymentFrequency(paymentFrequency)
+        }
+    }
+
+    fun calculatePayment(
+            vehiclePrice: Int,
+            termInMonths: Int,
+            annualInterestRate: Double,
+            paymentFrequency: PaymentFrequency,
+            cashDownAmount: Int,
+            tradeInAmount: Int): Int {
+
+        return try {
+            loanCalculator.calculateLoan(
+                    vehiclePrice = vehiclePrice,
+                    termInMonths = termInMonths,
+                    annualInterestRate = annualInterestRate,
+                    paymentFrequency = paymentFrequency,
+                    cashDownAmount = cashDownAmount,
+                    tradeInAmount = tradeInAmount
+            ).payment
+        } catch (e: NoLoanRequiredException) {
+            0
         }
     }
 }

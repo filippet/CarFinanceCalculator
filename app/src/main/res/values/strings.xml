@@ -2,11 +2,16 @@
     <string name="app_name">CarFinanceCalculator</string>
 
     <!-- The names of the payment frequency options.
-     Usage: appear as the text on button-like widgets -->
+        Usage: appear as the text on the iOS type selector and
+        on the red tag trailing the payment amount -->
     <string name="monthly">Monthly</string>
     <string name="bi_weekly">Bi-Weekly</string>
     <string name="weekly">Weekly</string>
 
+    <!-- Appears on the red tag next to the amount when
+        the total down payment (= cash down + trade in)
+        is equal or greater than the vehicle price-->
+    <string name="no_loan_required">No Loan Required</string>
 
     <!-- The cash amount put as a down payment.
       Usage: static text naming an associated input field -->

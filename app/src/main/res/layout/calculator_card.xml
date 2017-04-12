@@ -40,13 +40,13 @@
                 <TextView
                     android:id="@+id/tv_payment_amount"
                     android:layout_width="0dp"
-                    android:layout_weight="6"
+                    android:layout_weight="9"
                     android:layout_height="56dp"
                     android:paddingTop="18dp"
                     android:paddingLeft="8dp"
                     android:textColor="@android:color/white"
                     android:background="@drawable/red_tag"
-                    android:text="$736* Monthly"/>
+                    android:text="$736* No Loan Required"/>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -73,9 +73,9 @@
                 </LinearLayout>
 
                 <ToggleButton
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginRight="4dp"
                     android:textOn=""
                     android:textOff=""
                     android:background="@drawable/ic_collapse"/>

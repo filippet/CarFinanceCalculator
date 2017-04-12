@@ -163,7 +163,7 @@ class LoanCalculator {
             tradeInAmount: Int) {
 
         if (cashDownAmount + tradeInAmount > vehiclePrice) {
-            throw IllegalArgumentException(
+            throw NoLoanRequiredException(
                     "The sum of cash down [$cashDownAmount] and trade-in amounts [$tradeInAmount] must not be greater than the vehicle price [$vehiclePrice]"
             )
         }
