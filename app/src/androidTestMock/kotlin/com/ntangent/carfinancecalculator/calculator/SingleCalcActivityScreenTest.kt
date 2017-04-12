@@ -9,17 +9,18 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import com.ntangent.carfinancecalculator.R
+import com.ntangent.carfinancecalculator.calculator.dev.SingleCalcActivity
 import org.junit.Rule
 import org.junit.Test
 
-class CalculatorActivityScreenTest {
+class SingleCalcActivityScreenTest {
 
     // See:
     //      http://stackoverflow.com/questions/29945087/kotlin-and-new-activitytestrule-the-rule-must-be-public
     // for the lack of support in Kotlin for using @Rule here
     //@Rule - cannot be used here (see link above); use @get:Rule instead
     @get:Rule var activityTestRule = ActivityTestRule(
-            CalculatorActivity::class.java,
+            SingleCalcActivity::class.java,
             true, //initial touch mode
             false //lazily launch activity
     )

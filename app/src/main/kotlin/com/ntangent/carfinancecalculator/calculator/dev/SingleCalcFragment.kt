@@ -1,4 +1,4 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
 import android.os.Bundle
 import android.support.annotation.IdRes
@@ -13,21 +13,23 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
+import com.ntangent.carfinancecalculator.calculator.CalculatorContract
+import com.ntangent.carfinancecalculator.calculator.TermInfo
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.widget.CurrencyEditText
 
 
-class CalculatorFragment : Fragment(), CalculatorContract.View {
+class SingleCalcFragment : Fragment(), CalculatorContract.View {
 
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment.
          *
-         * @return A new instance of fragment CalculatorFragment.
+         * @return A new instance of fragment SingleCalcFragment.
          */
-        fun newInstance(): CalculatorFragment {
-            return CalculatorFragment()
+        fun newInstance(): SingleCalcFragment {
+            return SingleCalcFragment()
         }
 
         private val KEY_CASH_DOWN = "KEY_CASH_DOWN"
@@ -195,9 +197,9 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
 
     private fun paymentFrequencyValueToResId(paymentFrequency: PaymentFrequency): Int {
         return when (paymentFrequency) {
-            PaymentFrequency.MONTHLY   -> R.id.rb_monthly
+            PaymentFrequency.MONTHLY -> R.id.rb_monthly
             PaymentFrequency.BI_WEEKLY -> R.id.rb_biweekly
-            PaymentFrequency.WEEKLY    -> R.id.rb_weekly
+            PaymentFrequency.WEEKLY -> R.id.rb_weekly
         }
     }
 
@@ -229,19 +231,19 @@ class CalculatorFragment : Fragment(), CalculatorContract.View {
     }
 
     private fun Bundle.cashDown(): Int {
-        return this.getInt(KEY_CASH_DOWN)
+        return this.getInt(com.ntangent.carfinancecalculator.calculator.dev.SingleCalcFragment.KEY_CASH_DOWN)
     }
 
     private fun Bundle.tradeIn(): Int {
-        return this.getInt(KEY_TRADE_IN)
+        return this.getInt(com.ntangent.carfinancecalculator.calculator.dev.SingleCalcFragment.KEY_TRADE_IN)
     }
 
     private fun Bundle.saveCashDown(amount: Int) {
-        this.putInt(KEY_CASH_DOWN, amount)
+        this.putInt(com.ntangent.carfinancecalculator.calculator.dev.SingleCalcFragment.KEY_CASH_DOWN, amount)
     }
 
     private fun Bundle.saveTradeIn(amount: Int) {
-        this.putInt(KEY_TRADE_IN, amount)
+        this.putInt(com.ntangent.carfinancecalculator.calculator.dev.SingleCalcFragment.KEY_TRADE_IN, amount)
     }
 
 }

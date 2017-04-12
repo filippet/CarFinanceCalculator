@@ -1,6 +1,8 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
 import android.content.Context
+import com.ntangent.carfinancecalculator.calculator.CalculatorContract
+import com.ntangent.carfinancecalculator.calculator.dev.SingleCalcPresenter
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatterImpl
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
@@ -12,11 +14,11 @@ import dagger.Module
 import dagger.Provides
 
 /**
- * A Dagger module used to pass the View dependency to CalculatorPresenter
+ * A Dagger module used to pass the View dependency to SingleCalcPresenter
  */
 @Module
-class CalculatorPresenterModule(
-        private val view: CalculatorContract.View ) {
+class SingleCalcPresenterModule(
+        private val view: CalculatorContract.View) {
 
     @Provides
     internal fun provideCalculatorContractView(): CalculatorContract.View {
@@ -50,7 +52,7 @@ class CalculatorPresenterModule(
             loanCalculator: LoanCalculator,
             stringFormatter: CalculatorStringFormatter
     ): CalculatorContract.Presenter {
-        return CalculatorPresenter(
+        return SingleCalcPresenter(
                 getLoanTermsUseCase = getLoanTermsUseCase,
                 view = view,
                 loanCalculator = loanCalculator,

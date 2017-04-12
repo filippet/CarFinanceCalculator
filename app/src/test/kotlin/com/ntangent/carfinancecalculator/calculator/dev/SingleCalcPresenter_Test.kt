@@ -1,5 +1,8 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
+import com.ntangent.carfinancecalculator.calculator.CalculatorContract
+import com.ntangent.carfinancecalculator.calculator.TermInfo
+import com.ntangent.carfinancecalculator.calculator.dev.SingleCalcPresenter
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
@@ -19,8 +22,8 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 
-class CalculatorPresenter_Test {
-    private lateinit var presenter: CalculatorPresenter
+class SingleCalcPresenter_Test {
+    private lateinit var presenter: SingleCalcPresenter
 
     @Mock private lateinit var mockView: CalculatorContract.View
 
@@ -58,7 +61,7 @@ class CalculatorPresenter_Test {
         MockitoAnnotations.initMocks(this)
         val repo = FinanceParamsRepository(FakeDataSource())
         useCase = GetVehicleLoanTermsUseCase(repo, TestSubscriptionSchedulerProvider(), TestPostExecutionSchedulerProvider())
-        presenter = CalculatorPresenter(useCase, mockView, LoanCalculator(), FakeStringFormatter())
+        presenter = SingleCalcPresenter(useCase, mockView, LoanCalculator(), FakeStringFormatter())
         presenter.subscribe()
     }
 

@@ -1,6 +1,7 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
 import com.ntangent.carfinancecalculator.ApplicationModule
+import com.ntangent.carfinancecalculator.calculator.dev.SingleCalcActivity
 import com.ntangent.carfinancecalculator.data.source.FinanceParamsRepositoryComponent
 import com.ntangent.carfinancecalculator.util.FragmentScope
 import dagger.Component
@@ -8,9 +9,9 @@ import dagger.Component
 @FragmentScope
 @Component(
         dependencies = arrayOf(FinanceParamsRepositoryComponent::class),
-        modules = arrayOf(CalculatorPresenterModule::class, ApplicationModule::class)
+        modules = arrayOf(SingleCalcPresenterModule::class, ApplicationModule::class)
 )
-interface CalculatorComponent {
+interface SingleCalcComponent {
 
-    fun inject(calculatorActivity: CalculatorActivity)
+    fun inject(singleCalcActivity: SingleCalcActivity)
 }

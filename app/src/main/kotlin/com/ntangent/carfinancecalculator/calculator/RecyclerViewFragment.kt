@@ -20,7 +20,7 @@ class RecyclerViewFragment : Fragment(), RecyclerViewContract.View {
          * Use this factory method to create a new instance of
          * this fragment.
          *
-         * @return A new instance of fragment CalculatorFragment.
+         * @return A new instance of fragment RecyclerViewFragment.
          */
         fun newInstance(): RecyclerViewFragment {
             return RecyclerViewFragment()

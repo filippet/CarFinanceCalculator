@@ -1,6 +1,8 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
 import com.ntangent.carfinancecalculator.DefaultUseCaseObserver
+import com.ntangent.carfinancecalculator.calculator.CalculatorContract
+import com.ntangent.carfinancecalculator.calculator.TermInfo
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
@@ -10,7 +12,7 @@ import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 
-class CalculatorPresenter @Inject constructor (
+class SingleCalcPresenter @Inject constructor (
         private val getLoanTermsUseCase: GetVehicleLoanTermsUseCase,
         private val view: CalculatorContract.View,
         private val loanCalculator: LoanCalculator,

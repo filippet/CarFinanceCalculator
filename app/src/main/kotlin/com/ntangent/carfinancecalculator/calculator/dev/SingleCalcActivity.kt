@@ -1,4 +1,4 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
 import android.os.Bundle
 import android.support.annotation.VisibleForTesting
@@ -11,11 +11,11 @@ import com.ntangent.carfinancecalculator.util.EspressoIdlingResource
 import com.ntangent.carfinancecalculator.util.addFragment
 import javax.inject.Inject
 
-class CalculatorActivity : AppCompatActivity() {
+class SingleCalcActivity : AppCompatActivity() {
 
     private val FRAGMENT_CONTAINER_VIEW_RESOURCE_ID = R.id.v_content
 
-    @Inject lateinit var calculatorPresenter: CalculatorPresenter
+    @Inject lateinit var singleCalcPresenter: SingleCalcPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +26,10 @@ class CalculatorActivity : AppCompatActivity() {
         initiateInjector(fragment)
     }
 
-    private fun initiateInjector(calculatorFragment: CalculatorFragment) {
-        DaggerCalculatorComponent.builder()
-                .calculatorPresenterModule(
-                        CalculatorPresenterModule(calculatorFragment))
+    private fun initiateInjector(singleCalcFragment: SingleCalcFragment) {
+        DaggerSingleCalcComponent.builder()
+                .singleCalcPresenterModule(
+                        SingleCalcPresenterModule(singleCalcFragment))
                 .applicationModule(
                         ApplicationModule(applicationContext))
                 .financeParamsRepositoryComponent(
@@ -38,18 +38,18 @@ class CalculatorActivity : AppCompatActivity() {
                 .inject(this)
     }
 
-    private fun initializeFragment() : CalculatorFragment {
+    private fun initializeFragment() : SingleCalcFragment {
         val fragment = findFragment()
         if (fragment != null) return fragment
 
-        val newFragment = CalculatorFragment.newInstance()
+        val newFragment = SingleCalcFragment.newInstance()
         supportFragmentManager.addFragment(FRAGMENT_CONTAINER_VIEW_RESOURCE_ID, newFragment)
         return newFragment
     }
 
-    private fun findFragment(): CalculatorFragment? {
+    private fun findFragment(): SingleCalcFragment? {
         return supportFragmentManager.findFragmentById(
-                FRAGMENT_CONTAINER_VIEW_RESOURCE_ID) as CalculatorFragment?
+                FRAGMENT_CONTAINER_VIEW_RESOURCE_ID) as SingleCalcFragment?
     }
 
     @VisibleForTesting
