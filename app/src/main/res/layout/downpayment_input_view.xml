@@ -17,6 +17,7 @@
         android:id="@+id/tx_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:selectAllOnFocus="true"
         android:layout_weight="1"
         android:gravity="right"
         android:inputType="numberPassword"
