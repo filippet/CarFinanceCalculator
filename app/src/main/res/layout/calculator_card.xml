@@ -94,19 +94,13 @@
 
                 <TextView
                     android:id="@+id/tv_min_term"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="36 mo"/>
+                    style="@style/term_month_seek_bar_label"
+                    android:text="36 mo" />
 
                 <TextView
                     android:id="@+id/tv_max_term"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    style="@style/term_month_seek_bar_label"
                     android:gravity="right"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                     android:text="84 mo"/>
 
             </LinearLayout>
@@ -121,28 +115,27 @@
                 android:id="@+id/rg_payment_frequency"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="26dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center">
 
                 <RadioButton
                     android:id="@+id/rb_monthly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ios_selector_button_style"
                     android:text="@string/monthly"
                     android:checked="true" />
 
                 <RadioButton
                     android:id="@+id/rb_biweekly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ios_selector_button_style"
                     android:text="@string/bi_weekly"/>
 
                 <RadioButton
                     android:id="@+id/rb_weekly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ios_selector_button_style"
                     android:text="@string/weekly"/>
 
             </RadioGroup>
