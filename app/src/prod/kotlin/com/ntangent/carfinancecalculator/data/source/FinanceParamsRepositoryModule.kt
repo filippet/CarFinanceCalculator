@@ -6,6 +6,7 @@ import com.ntangent.carfinancecalculator.data.executor.IoSchedulerProvider
 import com.ntangent.carfinancecalculator.executor.PostExecutionSchedulerProvider
 import com.ntangent.carfinancecalculator.executor.SubscriptionSchedulerProvider
 import com.ntangent.carfinancecalculator.executor.UiSchedulerProvider
+import com.ntangent.carfinancecalculator.model.GsonVehicleTermParamsJsonDeserializer
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -43,8 +44,16 @@ class FinanceParamsRepositoryModule {
 
     @Singleton
     @Provides
-    internal fun provideLocalFinanceParamsDataSource(jsonFileReader: JsonFileReader): FinanceParamsDataSource {
-        return JsonFileFinanceParamsDataSource(jsonFileReader)
+    internal fun provideVehicleTermParamsJsonDeserializer(): VehicleTermParamsJsonDeserializer {
+        return GsonVehicleTermParamsJsonDeserializer()
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideLocalFinanceParamsDataSource(
+            jsonFileReader: JsonFileReader,
+            jsonDeserializer: VehicleTermParamsJsonDeserializer): FinanceParamsDataSource {
+        return JsonFileFinanceParamsDataSource(jsonFileReader, jsonDeserializer)
     }
 
     @Singleton

@@ -9,7 +9,9 @@ import io.reactivex.Observable
 /**
  * Fake local data source.
  */
-class FakeLocalFinanceParamsDataSource: FinanceParamsDataSource {
+class FakeLocalFinanceParamsDataSource(
+        val jsonDeserializer: VehicleTermParamsJsonDeserializer
+): FinanceParamsDataSource {
     override fun getFinanceParams(): Observable<List<FinanceParams>> {
 //        return Observable.just(makeParams())
         return Observable.just(readFromFakeJson())
@@ -44,8 +46,7 @@ class FakeLocalFinanceParamsDataSource: FinanceParamsDataSource {
     }
 
     private fun parseParams(): List<VehicleTermParams> {
-        return Gson().fromJson<List<VehicleTermParams>>(
-                jsonStr, object : TypeToken<List<VehicleTermParams>>(){}.type)
+        return jsonDeserializer.deserialize(jsonStr)
     }
 
     companion object {
