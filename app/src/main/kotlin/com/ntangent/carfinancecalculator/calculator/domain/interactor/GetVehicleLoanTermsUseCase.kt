@@ -1,7 +1,7 @@
 package com.ntangent.carfinancecalculator.calculator.domain.interactor
 
 import com.ntangent.carfinancecalculator.ObservableUseCase
-import com.ntangent.carfinancecalculator.data.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import com.ntangent.carfinancecalculator.data.source.FinanceParamsRepository
 import com.ntangent.carfinancecalculator.executor.PostExecutionSchedulerProvider
 import com.ntangent.carfinancecalculator.executor.SubscriptionSchedulerProvider

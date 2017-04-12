@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ntangent.carfinancecalculator.R
-import com.ntangent.carfinancecalculator.data.FinanceParams
-import com.ntangent.carfinancecalculator.data.VehicleTermRate
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceTermRate
 
 
 class RecyclerViewFragment : Fragment() {
@@ -56,20 +56,20 @@ class RecyclerViewFragment : Fragment() {
                 FinanceParams(
                         vehiclePrice = 48801,
                         termRates = arrayListOf(
-                                VehicleTermRate(24, 9.99),
-                                VehicleTermRate(36, 8.99),
-                                VehicleTermRate(48, 7.99),
-                                VehicleTermRate(60, 6.99),
-                                VehicleTermRate(72, 5.99)
+                                FinanceTermRate(24, 9.99),
+                                FinanceTermRate(36, 8.99),
+                                FinanceTermRate(48, 7.99),
+                                FinanceTermRate(60, 6.99),
+                                FinanceTermRate(72, 5.99)
                         )
                 ),
 
                 FinanceParams(
                         vehiclePrice = 5600,
                         termRates = arrayListOf(
-                                VehicleTermRate(12, 4.99),
-                                VehicleTermRate(24, 3.99),
-                                VehicleTermRate(36, 2.99)
+                                FinanceTermRate(12, 4.99),
+                                FinanceTermRate(24, 3.99),
+                                FinanceTermRate(36, 2.99)
                         )
                 )
         )

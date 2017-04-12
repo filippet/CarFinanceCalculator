@@ -3,7 +3,7 @@ package com.ntangent.carfinancecalculator.calculator
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatter
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import com.ntangent.carfinancecalculator.data.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import javax.inject.Inject
 
 

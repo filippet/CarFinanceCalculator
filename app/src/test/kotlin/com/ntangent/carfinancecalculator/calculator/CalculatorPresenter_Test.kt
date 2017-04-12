@@ -67,8 +67,8 @@ class CalculatorPresenter_Test {
         verifyView().setPaymentAmount("2307")
         verifyView().setTerm(PARAMS_0_TERM_0.toString())
         verifyView().setRate(PARAMS_0_RATE_0.toString())
-        verifyView().setMinTermMonths(PARAMS_0_TERM_0.toString())
-        verifyView().setMaxTermMonths(PARAMS_0_TERM_4.toString())
+        val termInfo = TermInfo(PARAMS_0_TERM_0.toString(), PARAMS_0_TERM_4.toString(), PARAMS_0_TERM_4 - PARAMS_0_TERM_0, 0)
+        verifyView().setTermBounds(termInfo)
         verifyView().setPaymentFrequency(PaymentFrequency.MONTHLY)
     }
 

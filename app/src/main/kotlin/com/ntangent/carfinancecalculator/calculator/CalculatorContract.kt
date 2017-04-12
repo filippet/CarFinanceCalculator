@@ -3,7 +3,7 @@ package com.ntangent.carfinancecalculator.calculator
 import com.ntangent.carfinancecalculator.BasePresenter
 import com.ntangent.carfinancecalculator.BaseView
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import com.ntangent.carfinancecalculator.data.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 
 data class TermInfo(
         val minTerm: String,

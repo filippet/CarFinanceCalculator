@@ -5,7 +5,7 @@ import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringForma
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
 import com.ntangent.carfinancecalculator.calculator.domain.interactor.GetVehicleLoanTermsUseCase
-import com.ntangent.carfinancecalculator.data.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 

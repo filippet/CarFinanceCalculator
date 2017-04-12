@@ -96,6 +96,9 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     kapt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
 
+    // Gson
+    compile 'com.google.code.gson:gson:2.7'
+
     //-----------------------------
     // Test dependencies
     //-----------------------------

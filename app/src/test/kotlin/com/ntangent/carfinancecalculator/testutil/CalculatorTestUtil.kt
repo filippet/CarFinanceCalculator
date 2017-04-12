@@ -1,7 +1,7 @@
 package com.ntangent.carfinancecalculator.testutil
 
-import com.ntangent.carfinancecalculator.data.FinanceParams
-import com.ntangent.carfinancecalculator.data.VehicleTermRate
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceTermRate
 import com.ntangent.carfinancecalculator.data.source.FinanceParamsDataSource
 import io.reactivex.Observable
 import io.reactivex.observers.DisposableObserver
@@ -35,20 +35,20 @@ object TestParamsCreator {
     val PARAMS_0 = FinanceParams(
                 vehiclePrice = PARAMS_0_VEHICLE_PRICE,
                 termRates = arrayListOf(
-                        VehicleTermRate(PARAMS_0_TERM_0, PARAMS_0_RATE_0),
-                        VehicleTermRate(PARAMS_0_TERM_1, PARAMS_0_RATE_1),
-                        VehicleTermRate(PARAMS_0_TERM_2, PARAMS_0_RATE_2),
-                        VehicleTermRate(PARAMS_0_TERM_3, PARAMS_0_RATE_3),
-                        VehicleTermRate(PARAMS_0_TERM_4, PARAMS_0_RATE_4)
+                        FinanceTermRate(PARAMS_0_TERM_0, PARAMS_0_RATE_0),
+                        FinanceTermRate(PARAMS_0_TERM_1, PARAMS_0_RATE_1),
+                        FinanceTermRate(PARAMS_0_TERM_2, PARAMS_0_RATE_2),
+                        FinanceTermRate(PARAMS_0_TERM_3, PARAMS_0_RATE_3),
+                        FinanceTermRate(PARAMS_0_TERM_4, PARAMS_0_RATE_4)
                 )
         )
 
         val PARAMS_1 = FinanceParams(
                 vehiclePrice = PARAMS_1_VEHICLE_PRICE,
                 termRates = arrayListOf(
-                        VehicleTermRate(PARAMS_1_TERM_0, PARAMS_1_RATE_0),
-                        VehicleTermRate(PARAMS_1_TERM_1, PARAMS_1_RATE_1),
-                        VehicleTermRate(PARAMS_1_TERM_2, PARAMS_1_RATE_2)
+                        FinanceTermRate(PARAMS_1_TERM_0, PARAMS_1_RATE_0),
+                        FinanceTermRate(PARAMS_1_TERM_1, PARAMS_1_RATE_1),
+                        FinanceTermRate(PARAMS_1_TERM_2, PARAMS_1_RATE_2)
                 )
         )
 }

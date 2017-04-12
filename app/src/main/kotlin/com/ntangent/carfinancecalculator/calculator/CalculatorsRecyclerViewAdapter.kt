@@ -15,7 +15,7 @@ import com.ntangent.carfinancecalculator.R
 import com.ntangent.carfinancecalculator.calculator.domain.CalculatorStringFormatterImpl
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import com.ntangent.carfinancecalculator.data.FinanceParams
+import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import com.ntangent.carfinancecalculator.widget.CurrencyEditText
 
 class CalculatorsRecyclerViewAdapter(
@@ -36,6 +36,7 @@ class CalculatorsRecyclerViewAdapter(
         return holder
     }
 
+
     override fun getItemCount(): Int {
         return financeParamsList.size
     }
@@ -44,6 +45,8 @@ class CalculatorsRecyclerViewAdapter(
         val financeParams = financeParamsList[position]
         holder.bindFinanceParams(financeParams)
     }
+
+
 
     class CalculatorViewHolder(v: View) : RecyclerView.ViewHolder(v), CalculatorContract.View {
 
@@ -111,6 +114,7 @@ class CalculatorsRecyclerViewAdapter(
             })
 
         }
+
 
         override fun setPresenter(presenter: CalculatorContract.Presenter) {
             this.presenter = presenter
