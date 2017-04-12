@@ -1,7 +1,5 @@
 package com.ntangent.carfinancecalculator.data.source
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceTermRate
 import io.reactivex.Observable

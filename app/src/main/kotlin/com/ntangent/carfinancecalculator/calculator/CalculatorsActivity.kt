@@ -11,9 +11,6 @@ import com.ntangent.carfinancecalculator.util.EspressoIdlingResource
 import com.ntangent.carfinancecalculator.util.addFragment
 import javax.inject.Inject
 
-/**
- * Created by filip on 4/11/17.
- */
 class CalculatorsActivity : AppCompatActivity() {
 
     private val FRAGMENT_CONTAINER_VIEW_RESOURCE_ID = R.id.v_content

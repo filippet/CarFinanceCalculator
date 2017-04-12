@@ -3,9 +3,6 @@ package com.ntangent.carfinancecalculator.data.source
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceParams
 import com.ntangent.carfinancecalculator.calculator.domain.FinanceTermRate
 
-/**
- * Created by filip on 4/11/17.
- */
 class VehicleTermRatesConverter {
 
     fun convertToFinanceParams(vehicleTermParams: VehicleTermParams): FinanceParams {

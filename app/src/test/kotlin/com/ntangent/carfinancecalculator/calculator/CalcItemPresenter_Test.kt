@@ -1,12 +1,9 @@
-package com.ntangent.carfinancecalculator.calculator.dev
+package com.ntangent.carfinancecalculator.calculator
 
-import com.ntangent.carfinancecalculator.calculator.CalculatorContract
-import com.ntangent.carfinancecalculator.calculator.TermInfoViewModel
 import com.ntangent.carfinancecalculator.calculator.domain.LoanCalculator
 import com.ntangent.carfinancecalculator.calculator.domain.PaymentFrequency
-import com.ntangent.carfinancecalculator.calculator.domain.interactor.GetVehicleLoanTermsUseCase
-import com.ntangent.carfinancecalculator.data.source.FinanceParamsRepository
 import com.ntangent.carfinancecalculator.testutil.*
+import com.ntangent.carfinancecalculator.testutil.TestParamsCreator.PARAMS_0
 import com.ntangent.carfinancecalculator.testutil.TestParamsCreator.PARAMS_0_RATE_0
 import com.ntangent.carfinancecalculator.testutil.TestParamsCreator.PARAMS_0_TERM_0
 import com.ntangent.carfinancecalculator.testutil.TestParamsCreator.PARAMS_0_TERM_4
@@ -17,12 +14,10 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class SingleCalcPresenter_Test {
-    private lateinit var presenter: SingleCalcPresenter
+class CalcItemPresenter_Test {
+    private lateinit var presenter: CalcItemPresenter
 
     @Mock private lateinit var mockView: CalculatorContract.View
-
-    private lateinit var useCase: GetVehicleLoanTermsUseCase
 
     @Before fun initMocks() {
         MockitoAnnotations.initMocks(this)
@@ -32,10 +27,8 @@ class SingleCalcPresenter_Test {
         mockView.forTest_returnCashDownAmount(0)
         mockView.forTest_returnTradeInAmount(0)
 
-        val repo = FinanceParamsRepository(FakeDataSource())
-        useCase = GetVehicleLoanTermsUseCase(repo, TestSubscriptionSchedulerProvider(), TestPostExecutionSchedulerProvider())
-        presenter = SingleCalcPresenter(useCase, mockView, LoanCalculator(), FakeStringFormatter())
-        presenter.subscribe()
+        presenter = CalcItemPresenter(mockView, LoanCalculator(), FakeStringFormatter())
+        presenter.setFinanceParams(PARAMS_0)
     }
 
     @Test fun testSettingView() {

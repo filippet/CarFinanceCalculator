@@ -1,4 +1,4 @@
-package com.ntangent.carfinancecalculator.calculator
+package com.ntangent.carfinancecalculator.calculator.dev
 
 import android.content.Intent
 import android.support.annotation.IdRes
@@ -15,10 +15,6 @@ import org.junit.Test
 
 class SingleCalcActivityScreenTest {
 
-    // See:
-    //      http://stackoverflow.com/questions/29945087/kotlin-and-new-activitytestrule-the-rule-must-be-public
-    // for the lack of support in Kotlin for using @Rule here
-    //@Rule - cannot be used here (see link above); use @get:Rule instead
     @get:Rule var activityTestRule = ActivityTestRule(
             SingleCalcActivity::class.java,
             true, //initial touch mode
